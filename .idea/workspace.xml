@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0ebe39fc-453b-46ed-b570-e11267667e91" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/1p.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/1q.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/1q.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/2p.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/2p.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/2q.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/2q.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/3q.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/3q.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/5q.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/5q.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Assignment_3.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Bubblesort.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Bubblesort.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/HK.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/HK.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/IBN.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/IBN.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Sanskruti_Shahu_lc2020056.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled1b.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled1b.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled3.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled4.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/Untitled4.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/VCp.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/VCp.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/aandc.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/aandc.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/add.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/add.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct3b.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct3c.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/advfunct3c.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/ali.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/ali.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/aman.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/aman.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/arr1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/arr1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/arr2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/arr2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/asumb.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/asumb.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/atm.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/atm.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/cbac.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/charsum.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/charsum.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/chef.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/chef.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/cho.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/cho.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/choco.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/choco.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/chocolate.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/chocolate.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/computer.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/computer.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/condition operator.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/conject.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/conject.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/costofballoon.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/costofballoon.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/count.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/count.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/cp.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/cp.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/dbakj.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/dbakj.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/divisibility.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/divisibility.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/divisible.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/divisible.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/do while loop.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/doc.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/doc.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/dsg.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/ele.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/ele.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/elev.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/elev.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/emaze.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/emaze.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/enormous.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/enormous.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/fac.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/fac.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/fac.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/factorial.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/factorial.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/fghd.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/fghd.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/flatland.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/flatland.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/for loop.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/funct1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/funct1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/funct2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/funct2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/funct4.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/funct4.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/functions.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/functions.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/gabc.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/gabc.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/gcd_lcm.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/gcd_lcm.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/ghj.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/ghj.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/gto.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/gto.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/hec.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/hgs.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/hhu.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/hhu.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/highdiv.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/highdiv.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/howmany.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/howmany.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/if else odd even.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/if else.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/impos.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/impos.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/korona.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/korona.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/l1.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/l1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/l2.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/l2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/lad.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/lad.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/lifeuniverse.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/lifeuniverse.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/liftquery.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/liftquery.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/magic.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/magic.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/maxfun.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/maxfun.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/mohit.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/mohit.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/monk1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/monk1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/motupatlu.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/motupatlu.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/mul.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/mul.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/myl2.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/myl2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/nested if else.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/omagoturulob.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/omagoturulob.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/pattern.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/pattern.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/playwnos.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/playwnos.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py11.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py12.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py13.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py14.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py15.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py16.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py31.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py32.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/py33.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/python idle/py1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/python idle/py2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/python idle/py3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/r1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/r1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/rank 1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/rough.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/roynfb.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/roynfb.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sample1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sample1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sanskruti_shahu_lcs2020056.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sdf.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sdf.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/secondlargest.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/secondlargest.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/shg.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/shg.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/smn.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/smn.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/splithouse.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/splithouse.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sqroot.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sqroot.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/string1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/string1.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/string2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/string2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/string3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sumofdigits.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sumofdigits.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sumoffl.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/sumoffl.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/switch.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/switch.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/taxi.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/taxi.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/tempCodeRunnerFile.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/thnkshelp.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/thnkshelp.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/toogle.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/toogle.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/tri.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/tri.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/twostring.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/twostring.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/uj.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/uj.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/vorc.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/vorc.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/vsa.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/xoxo.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/xyc.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/zo.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/zo.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/zoo.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sanskrutishahu/zoo.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sanskrutishahu/lcs2020056_sanskruti.cpp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1616135634285">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1616135634285" />
+    <state x="303" y="1" key="search.everywhere.popup" timestamp="1616135781987">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1616135781987" />
+  </component>
+</project>
