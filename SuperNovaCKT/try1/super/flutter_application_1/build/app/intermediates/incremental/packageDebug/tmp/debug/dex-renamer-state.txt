@@ -1,0 +1,4 @@
+#Fri Mar 26 19:53:50 IST 2021
+base.0=D\:\\MyFiles\\SuperNovaCKT\\try1\\super\\flutter_application_1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
