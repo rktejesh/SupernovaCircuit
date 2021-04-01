@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './XDloginButton_choicepg.dart';
-import './XDsignupButton_choicepg.dart';
-import './XDskip_choicepg.dart';
-import './XDgithubLogo.dart';
-import './XDfbLogo.dart';
-import './XDgmailLogo.dart';
+import '../../../XDloginButton_choicepg.dart';
+import '../../../XDsignupButton_choicepg.dart';
+import '../../../XDskip_choicepg.dart';
+import '../../../XDgithubLogo.dart';
+import '../../../XDfbLogo.dart';
+import '../../../XDgmailLogo.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class XDChoice_page extends StatelessWidget {
@@ -28,8 +28,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(92.0, 114.0),
             child:
-                // Adobe XD layer: 'Logo' (group)
-                SizedBox(
+            // Adobe XD layer: 'Logo' (group)
+            SizedBox(
               width: 228.0,
               height: 47.0,
               child: Stack(
@@ -59,8 +59,8 @@ class XDChoice_page extends StatelessWidget {
                     pinBottom: true,
                     fixedWidth: true,
                     child:
-                        // Adobe XD layer: 'edit_calendar-24px' (group)
-                        Stack(
+                    // Adobe XD layer: 'edit_calendar-24px' (group)
+                    Stack(
                       children: <Widget>[
                         Pinned.fromSize(
                           bounds: Rect.fromLTWH(0.0, 0.0, 47.0, 47.0),
@@ -96,8 +96,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(-22.0, 240.0),
             child:
-                // Adobe XD layer: 'background_choicepg' (shape)
-                Container(
+            // Adobe XD layer: 'background_choicepg' (shape)
+            Container(
               width: 451.0,
               height: 700.0,
               decoration: BoxDecoration(
@@ -110,8 +110,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(62.0, 323.0),
             child:
-                // Adobe XD layer: 'loginButton_choicepg' (component)
-                SizedBox(
+            // Adobe XD layer: 'loginButton_choicepg' (component)
+            SizedBox(
               width: 288.0,
               height: 85.0,
               child: XDloginButton_choicepg(),
@@ -120,8 +120,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(62.0, 469.0),
             child:
-                // Adobe XD layer: 'signupButton_choice…' (component)
-                SizedBox(
+            // Adobe XD layer: 'signupButton_choice…' (component)
+            SizedBox(
               width: 288.0,
               height: 85.0,
               child: XDsignupButton_choicepg(),
@@ -130,8 +130,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(104.0, 783.0),
             child:
-                // Adobe XD layer: 'skip_choicepg' (component)
-                SizedBox(
+            // Adobe XD layer: 'skip_choicepg' (component)
+            SizedBox(
               width: 204.0,
               height: 51.0,
               child: XDskip_choicepg(),
@@ -152,8 +152,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(269.0, 657.0),
             child:
-                // Adobe XD layer: 'githubLogo' (component)
-                SizedBox(
+            // Adobe XD layer: 'githubLogo' (component)
+            SizedBox(
               width: 102.0,
               height: 80.0,
               child: XDgithubLogo(),
@@ -162,8 +162,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(41.0, 657.0),
             child:
-                // Adobe XD layer: 'fbLogo' (component)
-                SizedBox(
+            // Adobe XD layer: 'fbLogo' (component)
+            SizedBox(
               width: 102.0,
               height: 80.0,
               child: XDfbLogo(),
@@ -172,8 +172,8 @@ class XDChoice_page extends StatelessWidget {
           Transform.translate(
             offset: Offset(155.0, 657.0),
             child:
-                // Adobe XD layer: 'gmailLogo' (component)
-                SizedBox(
+            // Adobe XD layer: 'gmailLogo' (component)
+            SizedBox(
               width: 102.0,
               height: 80.0,
               child: XDgmailLogo(),
