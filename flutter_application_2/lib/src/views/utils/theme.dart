@@ -7,6 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Login App',
       theme: ThemeData(
+        fontFamily: 'Caveat',
           scaffoldBackgroundColor: Colors.white,
           hintColor: Color(0xff727171),
           buttonTheme: ButtonThemeData(

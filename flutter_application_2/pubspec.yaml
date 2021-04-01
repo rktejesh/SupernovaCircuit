@@ -42,3 +42,6 @@ flutter:
     - family: Caveat
       fonts:
         - asset: lib/src/assets/fonts/Caveat-Bold.ttf
+    - family: UbuntuMono
+      fonts:
+        - asset: lib/src/assets/fonts/UbuntuMono-Regular.ttf
