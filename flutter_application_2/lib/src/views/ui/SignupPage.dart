@@ -10,6 +10,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Padding(
@@ -34,81 +35,83 @@ class _SignupPageState extends State<SignupPage> {
               ],
             ),
           ),
-          Padding(
+          Container(
             padding: EdgeInsets.all(20),
-            child: Stack(
-                clipBehavior: Clip.none,
-                alignment: AlignmentDirectional.center,
-                children: [
-                  Container(
-                    width: 340.0,
-                    height: 539.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(padding: EdgeInsets.all(20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Email',
-                            ),
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.all(20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Password',
-                            ),
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.all(20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Confirm Password',
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                              },
-                              style: ButtonStyle(
-                                padding: MaterialStateProperty.all(EdgeInsets.all(30))
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(20),
+              child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(padding: EdgeInsets.all(20),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Email',
                               ),
-                              child: Text('SignUp'),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(44.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: Offset(0, 0),
-                          blurRadius: 6,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: -30,
-                    left: 90,
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 48,
-
-                        color: const Color(0xffff0266),
-                        fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Padding(padding: EdgeInsets.all(20),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                              ),
+                            ),
+                          ),
+                          Padding(padding: EdgeInsets.all(20),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Confirm Password',
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                },
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(EdgeInsets.all(10))
+                                ),
+                                child: Text('SignUp'),
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                      textAlign: TextAlign.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(44.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(0, 0),
+                            blurRadius: 6,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ]),
+                    Positioned(
+                      top: -30,
+                      left: 90,
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontSize: 48,
+
+                          color: const Color(0xffff0266),
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ]),
+            ),
           )
         ]),
       ),

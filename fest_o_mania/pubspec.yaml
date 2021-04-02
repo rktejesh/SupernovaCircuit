@@ -1,0 +1,35 @@
+name: fest_o_mania
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  adobe_xd: ^1.0.0+1
+  flutter_launcher_icons: ^0.7.3
+  cupertino_icons: ^1.0.1
+  url_launcher: ^6.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/src/assets/images/
+
+  fonts:
+    - family: Forte
+      fonts:
+        - asset: lib/src/assets/fonts/FORTE.TTF
+    - family: Alegreya
+      fonts:
+        - asset: lib/src/assets/fonts/Alegreya-Regular.ttf
+        - asset: lib/src/assets/fonts/Alegreya-SemiBold.ttf
