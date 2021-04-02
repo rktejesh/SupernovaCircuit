@@ -6,10 +6,16 @@ import './XDMain_page_bookmark.dart';
 import './XDMain_page_upcoming.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class XDMain_page_live extends StatelessWidget {
+class XDMain_page_live extends StatefulWidget {
   XDMain_page_live({
     Key key,
   }) : super(key: key);
+
+  @override
+  _XDMain_page_liveState createState() => _XDMain_page_liveState();
+}
+
+class _XDMain_page_liveState extends State<XDMain_page_live> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
