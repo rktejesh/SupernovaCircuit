@@ -78,7 +78,7 @@ class XDSignup_page extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(174.0, -151.0),
+            offset: Offset(164.0, -145.0),
             child:
                 // Adobe XD layer: 'boyImage_signuppg' (shape)
                 Container(

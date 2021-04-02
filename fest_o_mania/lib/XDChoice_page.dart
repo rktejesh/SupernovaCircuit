@@ -94,12 +94,12 @@ class XDChoice_page extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(-22.0, 240.0),
+            offset: Offset(0.0, 220.0),
             child:
                 // Adobe XD layer: 'background_choicepg' (shape)
                 Container(
-              width: 451.0,
-              height: 700.0,
+              width: 412.0,
+              height: 926.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(112.0),
                 color: const Color(0xfff4f5fa),
