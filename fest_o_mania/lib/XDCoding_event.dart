@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './XDSidebar.dart';
+import './XDsearch.dart';
 import 'package:adobe_xd/page_link.dart';
+import './XDSidebar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class XDCoding_event extends StatelessWidget {
@@ -18,38 +19,47 @@ class XDCoding_event extends StatelessWidget {
             offset: Offset(340.0, 21.0),
             child:
                 // Adobe XD layer: 'searchIcon_codingevn' (group)
-                SizedBox(
-              width: 52.0,
-              height: 52.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 52.0, 52.0),
-                    size: Size(52.0, 52.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: SvgPicture.string(
-                      _svg_9kvwt3,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  ease: Curves.easeInOut,
+                  duration: 0.0,
+                  pageBuilder: () => XDsearch(),
+                ),
+              ],
+              child: SizedBox(
+                width: 52.0,
+                height: 52.0,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(0.0, 0.0, 52.0, 52.0),
+                      size: Size(52.0, 52.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: SvgPicture.string(
+                        _svg_9kvwt3,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(6.5, 6.5, 37.9, 37.9),
-                    size: Size(52.0, 52.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: SvgPicture.string(
-                      _svg_7p1vlt,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(6.5, 6.5, 37.9, 37.9),
+                      size: Size(52.0, 52.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: SvgPicture.string(
+                        _svg_7p1vlt,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -97,10 +107,15 @@ class XDCoding_event extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: 'blue-programming-co…' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -152,10 +167,15 @@ class XDCoding_event extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: 'DG9DuM9UQAIbSrS' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -207,10 +227,15 @@ class XDCoding_event extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: 'coding-bootcamp-mot…' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -262,10 +287,15 @@ class XDCoding_event extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: '2017-11-22-PHOTO-00…' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
