@@ -362,8 +362,11 @@ class XDSidebar extends StatelessWidget {
             width: 342.0,
             height: 870.0,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(10.0),
+                bottomRight: Radius.circular(10.0),
+              ),
               color: const Color(0xffffffff),
-              border: Border.all(width: 1.0, color: const Color(0xff707070)),
               boxShadow: [
                 BoxShadow(
                   color: const Color(0xffb2b1ca),
@@ -373,13 +376,26 @@ class XDSidebar extends StatelessWidget {
               ],
             ),
           ),
-          // Adobe XD layer: 'sidebarTopbox_sideb…' (shape)
-          Container(
-            width: 342.0,
-            height: 125.0,
-            decoration: BoxDecoration(
-              color: const Color(0xffffffff),
-              border: Border.all(width: 1.0, color: const Color(0xff707070)),
+          Transform.translate(
+            offset: Offset(0.0, 14.0),
+            child:
+                // Adobe XD layer: 'sidebarTopbox_sideb…' (shape)
+                Container(
+              width: 342.0,
+              height: 111.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10.0),
+                ),
+                color: const Color(0xbaffffff),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xbab2b1ca),
+                    offset: Offset(0, 3),
+                    blurRadius: 6,
+                  ),
+                ],
+              ),
             ),
           ),
           Transform.translate(
