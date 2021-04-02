@@ -10,8 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   adobe_xd: ^1.0.0+1
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: ^0.7.3
   cupertino_icons: ^1.0.1
+  url_launcher: ^6.0.3
 
 dev_dependencies:
   flutter_test:
@@ -30,33 +31,5 @@ flutter:
         - asset: lib/src/assets/fonts/FORTE.TTF
     - family: Alegreya
       fonts:
-        - asset: lib/src/assets/fonts/Alegreya-Black.ttf
-          weight: 900
-        - asset: lib/src/assets/fonts/Alegreya-BlackItalic.ttf
-          weight: 900
-          style: italic
-        - asset: lib/src/assets/fonts/Alegreya-Bold.ttf
-          weight: 700
-        - asset: lib/src/assets/fonts/Alegreya-BoldItalic.ttf
-          style: italic
-          weight: 700
-        - asset: lib/src/assets/fonts/Alegreya-ExtraBold.ttf
-          weight: 800
-        - asset: lib/src/assets/fonts/Alegreya-ExtraBoldItalic.ttf
-          style: italic
-          weight: 800
-        - asset: lib/src/assets/fonts/Alegreya-Italic.ttf
-          weight: 400
-          style: italic
-        - asset: lib/src/assets/fonts/Alegreya-Medium.ttf
-          weight: 500
-        - asset: lib/src/assets/fonts/Alegreya-MediumItalic.ttf
-          weight: 500
-          style: italic
         - asset: lib/src/assets/fonts/Alegreya-Regular.ttf
-          weight: 400
         - asset: lib/src/assets/fonts/Alegreya-SemiBold.ttf
-          weight: 600
-        - asset: lib/src/assets/fonts/Alegreya-SemiBoldItalic.ttf
-          style: italic
-          weight: 600

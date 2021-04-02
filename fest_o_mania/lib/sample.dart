@@ -4,10 +4,9 @@ import './XDMain_page_live.dart';
 import 'package:adobe_xd/page_link.dart';
 import './XDusername_loginpg.dart';
 import './XDpassword_loginpg.dart';
-import './XDemail_signuppg.dart';
 
-class XDSignup_page extends StatelessWidget {
-  XDSignup_page({
+class XDLogin_page extends StatelessWidget {
+  XDLogin_page({
     Key key,
   }) : super(key: key);
   @override
@@ -17,9 +16,9 @@ class XDSignup_page extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Transform.translate(
-            offset: Offset(42.0, 174.0),
+            offset: Offset(42.0, 271.0),
             child: Text(
-              'Welcome',
+              'Welcome\nback ',
               style: TextStyle(
                 fontFamily: 'Alegreya',
                 fontSize: 40,
@@ -29,10 +28,22 @@ class XDSignup_page extends StatelessWidget {
             ),
           ),
           Transform.translate(
+            offset: Offset(228.0, 643.0),
+            child: Text(
+              'Forgot Password ?',
+              style: TextStyle(
+                fontFamily: 'Alegreya',
+                fontSize: 18,
+                color: const Color(0xffffffff),
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Transform.translate(
             offset: Offset(62.0, 705.0),
             child:
-                // Adobe XD layer: 'signupButton_signup…' (component)
-                PageLink(
+            // Adobe XD layer: 'loginButton_loginpg' (component)
+            PageLink(
               links: [
                 PageLinkInfo(
                   ease: Curves.easeInOut,
@@ -48,58 +59,38 @@ class XDSignup_page extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(42.0, 265.0),
+            offset: Offset(42.0, 417.0),
             child:
-                // Adobe XD layer: 'username_signuppg' (component)
-                SizedBox(
+            // Adobe XD layer: 'username_loginpg' (component)
+            SizedBox(
               width: 329.0,
               height: 63.0,
               child: XDusername_loginpg(),
             ),
           ),
           Transform.translate(
-            offset: Offset(42.0, 485.0),
+            offset: Offset(42.0, 543.0),
             child:
-                // Adobe XD layer: 'password_signuppg' (component)
-                SizedBox(
+            // Adobe XD layer: 'password_loginpg' (component)
+            SizedBox(
               width: 329.0,
               height: 63.0,
               child: XDpassword_loginpg(),
             ),
           ),
           Transform.translate(
-            offset: Offset(42.0, 595.0),
+            offset: Offset(119.0, -184.0),
             child:
-                // Adobe XD layer: 'confirmpass_signuppg' (component)
-                SizedBox(
-              width: 329.0,
-              height: 63.0,
-              child: XDpassword_loginpg(),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(174.0, -151.0),
-            child:
-                // Adobe XD layer: 'boyImage_signuppg' (shape)
-                Container(
-              width: 394.0,
-              height: 394.0,
+            // Adobe XD layer: 'boyImage_loginpg' (shape)
+            Container(
+              width: 473.0,
+              height: 473.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage(''),
                   fit: BoxFit.fill,
                 ),
               ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(42.0, 375.0),
-            child:
-                // Adobe XD layer: 'email_signuppg' (component)
-                SizedBox(
-              width: 329.0,
-              height: 63.0,
-              child: XDemail_signuppg(),
             ),
           ),
         ],

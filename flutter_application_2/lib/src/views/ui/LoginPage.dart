@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Padding(padding: EdgeInsets.all(20),
                             child: TextField(
                               decoration: InputDecoration(
-                                hintText: 'Email',
+                                labelText: 'Email',
                               ),
                             ),
                           ),
