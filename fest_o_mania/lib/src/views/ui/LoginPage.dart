@@ -23,8 +23,8 @@ class _LoginPageState extends State<LoginPage> {
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    width: 200,
-                    height: 200,
+                    width: 230,
+                    height: 230,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: const AssetImage("lib/src/assets/images/Untitled design.png"),
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 20, bottom: 20),
-                        labelText: 'User/Email',
+                        labelText: 'Username/Email',
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
                             borderSide: BorderSide(
@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                             )),
                         labelStyle: TextStyle(
-                            fontSize: 23,
+                            fontSize: 26,
                             color: Colors.white
                         )
                     ),
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                             )),
                       labelStyle: TextStyle(
-                        fontSize: 23,
+                        fontSize: 26,
                         color: Colors.white
                       )
                     ),
@@ -121,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                       'Forgot Password?',
                       textAlign: TextAlign.right,
                       style: TextStyle(
+                        fontSize: 20,
                         color: Colors.white
                       ),
                     ),
@@ -147,8 +148,9 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
 
                         },
+
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(EdgeInsets.only(left: 10, bottom: 5, top: 5,right: 10)),
                           backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                           shape: MaterialStateProperty.all(RoundedRectangleBorder(
