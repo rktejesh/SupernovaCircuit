@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 
-class XDcategoryofevent_register extends StatelessWidget {
-  XDcategoryofevent_register({
+class CategoryofeventRegister extends StatelessWidget {
+  CategoryofeventRegister({
     Key key,
   }) : super(key: key);
   @override
