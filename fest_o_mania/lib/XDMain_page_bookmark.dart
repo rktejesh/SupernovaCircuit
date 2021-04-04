@@ -4,7 +4,7 @@ import './XDsearch.dart';
 import 'package:adobe_xd/page_link.dart';
 import './XDSidebar.dart';
 import './XDMain_page_live.dart';
-import './XDMain_page_upcoming.dart';
+import 'src/views/ui/XDMain_page_upcoming.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class XDMain_page_bookmark extends StatelessWidget {
@@ -378,7 +378,7 @@ class XDMain_page_bookmark extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => XDMain_page_upcoming(),
+                  pageBuilder: () => MainPageUpcoming(),
                 ),
               ],
               child: Container(

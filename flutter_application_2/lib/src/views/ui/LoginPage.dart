@@ -34,70 +34,73 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Stack(
-                clipBehavior: Clip.none,
-                alignment: AlignmentDirectional.center,
-                children: [
-                  Container(
-                    width: 340.0,
-                    height: 539.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(padding: EdgeInsets.all(20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Email',
+          Container(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(40),
+              child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(padding: EdgeInsets.all(20),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                labelText: 'Email',
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Password',
+                          Padding(padding: EdgeInsets.all(20),
+                            child: TextField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+
+                              ),
                             ),
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                },
-                              child: Text('Login'),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(44.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: Offset(0, 0),
-                          blurRadius: 6,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: -30,
-                    left: 100,
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 48,
-                        color: const Color(0xffff0266),
-                        fontWeight: FontWeight.w700,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                  },
+                                child: Text('Login'),
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                      textAlign: TextAlign.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(44.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(0, 0),
+                            blurRadius: 6,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ]),
+                    Positioned(
+                      top: -30,
+                      left: 100,
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 48,
+                          color: const Color(0xffff0266),
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ]),
+            ),
           )
         ]),
       ),
