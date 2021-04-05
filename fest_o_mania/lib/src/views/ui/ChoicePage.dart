@@ -18,7 +18,7 @@ class _ChoicePageState extends State<ChoicePage> {
       backgroundColor: const Color(0xff1c69f0),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
+        children: [
           Padding(
             padding: const EdgeInsets.all(60.0),
             child: AppLogo1(),
@@ -115,7 +115,7 @@ class _ChoicePageState extends State<ChoicePage> {
                     style: TextStyle(
                       fontFamily: 'Alegreya',
                       fontSize: 25,
-                      color: const Color(0xff3928e3),
+                      color: const Color(0xff1c69f0),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -229,7 +229,7 @@ class _ChoicePageState extends State<ChoicePage> {
                             )
                           ]
                       ),
-                      child: OutlinedButton(
+                      child:OutlinedButton(
                         onPressed: () {
 
                         },

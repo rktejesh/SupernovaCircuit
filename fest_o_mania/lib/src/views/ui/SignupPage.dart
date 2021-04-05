@@ -14,38 +14,43 @@ class _SignupPageState extends State<SignupPage> {
         top: false,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(top:5.0,left: 20,right: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: const AssetImage("lib/src/assets/images/Untitled design.png"),
-                        fit: BoxFit.fill,
+                Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: const AssetImage("lib/src/assets/images/Untitled design.png"),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    'Welcome',
-                    style: TextStyle(
-                      fontFamily: 'Alegreya',
-                      fontSize: 40,
-                      color: const Color(0xffffffff),
+                    Padding(
+                      padding: const EdgeInsets.only(left:15),
+                      child: Text(
+                        'Welcome',
+                        style: TextStyle(
+                          fontFamily: 'Alegreya',
+                          fontSize: 40,
+                          color: const Color(0xffffffff),
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
-                    textAlign: TextAlign.left,
-                  ),
+                  ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(23.0),
                   child: TextField(
                     style: TextStyle(
                         color: Colors.white
@@ -53,7 +58,7 @@ class _SignupPageState extends State<SignupPage> {
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 20, bottom: 20),
-                        labelText: 'User',
+                        labelText: 'Username',
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
                             borderSide: BorderSide(
@@ -77,7 +82,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(23.0),
                   child: TextField(
                     style: TextStyle(
                         color: Colors.white
@@ -109,7 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(23),
                   child: TextField(
                     style: TextStyle(
                         color: Colors.white
@@ -142,7 +147,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(23),
                   child: TextField(
                     style: TextStyle(
                         color: Colors.white
@@ -176,7 +181,7 @@ class _SignupPageState extends State<SignupPage> {
                 SizedBox(
                   width: double.infinity,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 20, bottom: 20, left: 60, right: 60),
+                    padding: EdgeInsets.only(top: 25, bottom: 20, left: 60, right: 60),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.all(
@@ -195,7 +200,7 @@ class _SignupPageState extends State<SignupPage> {
 
                         },
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(EdgeInsets.only(left: 10, bottom: 5, top: 5,right: 10)),
                           backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                           shape: MaterialStateProperty.all(RoundedRectangleBorder(
