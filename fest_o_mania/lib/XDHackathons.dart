@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './XDSidebar.dart';
+import './XDsearch.dart';
 import 'package:adobe_xd/page_link.dart';
+import './XDevent_page.dart';
+import './XDSidebar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class XDHackathons extends StatelessWidget {
@@ -18,38 +20,47 @@ class XDHackathons extends StatelessWidget {
             offset: Offset(340.0, 21.0),
             child:
                 // Adobe XD layer: 'searchIcon_hackathon' (group)
-                SizedBox(
-              width: 52.0,
-              height: 52.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 0.0, 52.0, 52.0),
-                    size: Size(52.0, 52.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: SvgPicture.string(
-                      _svg_9kvwt3,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  ease: Curves.easeInOut,
+                  duration: 0.0,
+                  pageBuilder: () => XDsearch(),
+                ),
+              ],
+              child: SizedBox(
+                width: 52.0,
+                height: 52.0,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(0.0, 0.0, 52.0, 52.0),
+                      size: Size(52.0, 52.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: SvgPicture.string(
+                        _svg_9kvwt3,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(6.5, 6.5, 37.9, 37.9),
-                    size: Size(52.0, 52.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: SvgPicture.string(
-                      _svg_7p1vlt,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(6.5, 6.5, 37.9, 37.9),
+                      size: Size(52.0, 52.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: SvgPicture.string(
+                        _svg_7p1vlt,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -97,10 +108,15 @@ class XDHackathons extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: 'download' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -152,10 +168,15 @@ class XDHackathons extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: '29a20c67ca2df0b9952…' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -207,10 +228,15 @@ class XDHackathons extends StatelessWidget {
                     pinRight: true,
                     pinTop: true,
                     pinBottom: true,
-                    child: Container(
+                    child:
+                        // Adobe XD layer: 'code-hackathon-even…' (shape)
+                        Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                        image: DecorationImage(
+                          image: const AssetImage(''),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -222,54 +248,69 @@ class XDHackathons extends StatelessWidget {
             offset: Offset(22.0, 318.0),
             child:
                 // Adobe XD layer: 'box2_hackathon' (group)
-                SizedBox(
-              width: 368.0,
-              height: 210.0,
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(10.0, 0.0, 358.0, 195.0),
-                    size: Size(368.0, 210.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: const Color(0x0f6f7896),
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.Fade,
+                  ease: Curves.easeOut,
+                  duration: 0.3,
+                  pageBuilder: () => XDevent_page(),
+                ),
+              ],
+              child: SizedBox(
+                width: 368.0,
+                height: 210.0,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(10.0, 0.0, 358.0, 195.0),
+                      size: Size(368.0, 210.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: const Color(0x0f6f7896),
+                        ),
                       ),
                     ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(0.0, 15.0, 358.0, 195.0),
-                    size: Size(368.0, 210.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: const Color(0x0f6f7896),
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(0.0, 15.0, 358.0, 195.0),
+                      size: Size(368.0, 210.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: const Color(0x0f6f7896),
+                        ),
                       ),
                     ),
-                  ),
-                  Pinned.fromSize(
-                    bounds: Rect.fromLTWH(10.0, 15.0, 348.0, 180.0),
-                    size: Size(368.0, 210.0),
-                    pinLeft: true,
-                    pinRight: true,
-                    pinTop: true,
-                    pinBottom: true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: const Color(0xffffffff),
+                    Pinned.fromSize(
+                      bounds: Rect.fromLTWH(10.0, 15.0, 348.0, 180.0),
+                      size: Size(368.0, 210.0),
+                      pinLeft: true,
+                      pinRight: true,
+                      pinTop: true,
+                      pinBottom: true,
+                      child:
+                          // Adobe XD layer: 'download' (shape)
+                          Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          image: DecorationImage(
+                            image: const AssetImage(''),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

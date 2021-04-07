@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fest_o_mania/src/views/utils/Logo.dart';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
 import 'dart:async';
-import 'package:fest_o_mania/src/views/ui/sample.dart';
-
 
 class LoadingPage extends StatefulWidget {
   @override

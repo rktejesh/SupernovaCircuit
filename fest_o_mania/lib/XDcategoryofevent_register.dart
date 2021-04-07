@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 
-class XDusername_loginpg extends StatelessWidget {
-  XDusername_loginpg({
+class CategoryofeventRegister extends StatelessWidget {
+  CategoryofeventRegister({
     Key key,
   }) : super(key: key);
   @override
@@ -25,7 +25,7 @@ class XDusername_loginpg extends StatelessWidget {
           ),
         ),
         Pinned.fromSize(
-          bounds: Rect.fromLTWH(37.0, 11.0, 217.0, 41.0),
+          bounds: Rect.fromLTWH(37.0, 11.0, 210.0, 41.0),
           size: Size(329.0, 63.0),
           pinLeft: true,
           fixedWidth: true,
@@ -33,8 +33,8 @@ class XDusername_loginpg extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Pinned.fromSize(
-                bounds: Rect.fromLTWH(0.0, 0.0, 217.0, 41.0),
-                size: Size(217.0, 41.0),
+                bounds: Rect.fromLTWH(0.0, 0.0, 210.0, 41.0),
+                size: Size(210.0, 41.0),
                 pinLeft: true,
                 pinRight: true,
                 pinTop: true,
@@ -46,14 +46,14 @@ class XDusername_loginpg extends StatelessWidget {
                 ),
               ),
               Pinned.fromSize(
-                bounds: Rect.fromLTWH(15.0, 5.0, 183.0, 31.0),
-                size: Size(217.0, 41.0),
+                bounds: Rect.fromLTWH(19.0, 5.0, 169.0, 31.0),
+                size: Size(210.0, 41.0),
                 pinLeft: true,
                 pinRight: true,
                 pinTop: true,
                 pinBottom: true,
                 child: Text(
-                  'Username or Email',
+                  'Category of Event',
                   style: TextStyle(
                     fontFamily: 'Alegreya',
                     fontSize: 23,
