@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './XDsearch.dart';
 import 'package:adobe_xd/page_link.dart';
-import './XDHackathons.dart';
+import './Hackathon.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class XDevent_page extends StatelessWidget {
