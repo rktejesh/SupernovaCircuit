@@ -16,134 +16,68 @@ class _ChoicePageState extends State<ChoicePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1c69f0),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(60.0),
-            child: AppLogo1(),
-          ),
-          Container(
-            padding: EdgeInsets.all(40),
-            width: double.infinity,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(149, 157, 165, 0.1),
-                              offset: Offset(0, 0),
-                              blurRadius: 24,
-                            )
-                          ]
-                      ),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage(),));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
-                        ),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontFamily: 'Alegreya',
-                            fontSize: 35,
-                            color: const Color(0xff1c69f0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(30),
-                  child: SizedBox(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(60.0),
+              child: AppLogo1(),
+            ),
+            Container(
+              padding: EdgeInsets.all(40),
+              width: double.infinity,
+              child: Column(
+                children: [
+                  SizedBox(
                     width: double.infinity,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(149, 157, 165, 0.1),
-                              offset: Offset(0, 0),
-                              blurRadius: 16,
-                            )
-                          ]
-                      ),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignupPage(),));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(25.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(149, 157, 165, 0.1),
+                                offset: Offset(0, 0),
+                                blurRadius: 24,
+                              )
+                            ]
                         ),
-                        child: Text(
-                          'SignUp',
-                          style: TextStyle(
-                            fontFamily: 'Alegreya',
-                            fontSize: 35,
-                            color: const Color(0xff1c69f0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text(
-                    'OR',
-                    style: TextStyle(
-                      fontFamily: 'Alegreya',
-                      fontSize: 25,
-                      color: const Color(0xff1c69f0),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
                         child: OutlinedButton(
-                          child: SvgPicture.string(
-                            google,
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
-                            backgroundColor: MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                          ),
                           onPressed: () {
-
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage(),));
                           },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25))),
+                          ),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontFamily: 'Alegreya',
+                              fontSize: 35,
+                              color: const Color(0xff1c69f0),
+                            ),
+                          ),
                         ),
-                        decoration:BoxDecoration(
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(30),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(25.0),
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromRGBO(149, 157, 165, 0.1),
@@ -152,115 +86,183 @@ class _ChoicePageState extends State<ChoicePage> {
                               )
                             ]
                         ),
-                      ),
-                      Container(
                         child: OutlinedButton(
-                          child: SvgPicture.string(
-                            facebook,
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
-                            backgroundColor: MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                          ),
                           onPressed: () {
-
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignupPage(),));
                           },
-                        ),
-                        decoration:BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(149, 157, 165, 0.1),
-                                offset: Offset(0, 0),
-                                blurRadius: 16,
-                              )
-                            ]
-                        ),
-                      ),
-                      Container(
-                        child: OutlinedButton(
-                          child: SvgPicture.string(
-                            github,
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
-                            backgroundColor: MaterialStateProperty.all(Colors.white),
+                            padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                                borderRadius: BorderRadius.circular(25))),
                           ),
-                          onPressed: () {
-
-                          },
-                        ),
-                        decoration:BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(149, 157, 165, 0.1),
-                                offset: Offset(0, 0),
-                                blurRadius: 16,
-                              )
-                            ]
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 80, right: 80,top: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(149, 157, 165, 0.1),
-                              offset: Offset(0, 0),
-                              blurRadius: 16,
-                            )
-                          ]
-                      ),
-                      child:OutlinedButton(
-                        onPressed: () {
-
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
-                        ),
-                        child: Text(
-                          'Skip for Now',
-                          style: TextStyle(
-                            fontFamily: 'Alegreya',
-                            fontSize: 20,
-                            color: const Color(0xff1c69f0),
+                          child: Text(
+                            'SignUp',
+                            style: TextStyle(
+                              fontFamily: 'Alegreya',
+                              fontSize: 35,
+                              color: const Color(0xff1c69f0),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      'OR',
+                      style: TextStyle(
+                        fontFamily: 'Alegreya',
+                        fontSize: 25,
+                        color: const Color(0xff1c69f0),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: OutlinedButton(
+                            child: SvgPicture.string(
+                              google,
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
+                              backgroundColor: MaterialStateProperty.all(Colors.white),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                            ),
+                            onPressed: () {
+
+                            },
+                          ),
+                          decoration:BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(149, 157, 165, 0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 16,
+                                )
+                              ]
+                          ),
+                        ),
+                        Container(
+                          child: OutlinedButton(
+                            child: SvgPicture.string(
+                              facebook,
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
+                              backgroundColor: MaterialStateProperty.all(Colors.white),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                            ),
+                            onPressed: () {
+
+                            },
+                          ),
+                          decoration:BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(149, 157, 165, 0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 16,
+                                )
+                              ]
+                          ),
+                        ),
+                        Container(
+                          child: OutlinedButton(
+                            child: SvgPicture.string(
+                              github,
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
+                              backgroundColor: MaterialStateProperty.all(Colors.white),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                            ),
+                            onPressed: () {
+
+                            },
+                          ),
+                          decoration:BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(149, 157, 165, 0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 16,
+                                )
+                              ]
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 80, right: 80,top: 20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(25.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(149, 157, 165, 0.1),
+                                offset: Offset(0, 0),
+                                blurRadius: 16,
+                              )
+                            ]
+                        ),
+                        child:OutlinedButton(
+                          onPressed: () {
+
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25))),
+                          ),
+                          child: Text(
+                            'Skip for Now',
+                            style: TextStyle(
+                              fontFamily: 'Alegreya',
+                              fontSize: 20,
+                              color: const Color(0xff1c69f0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(60), topLeft: Radius.circular(60)),
+                color: const Color(0xfff4f5fa),
+                border: Border.all(width: 1.0, color: const Color(0xff707070)),
+              ),
             ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(60), topLeft: Radius.circular(60)),
-              color: const Color(0xfff4f5fa),
-              border: Border.all(width: 1.0, color: const Color(0xff707070)),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
