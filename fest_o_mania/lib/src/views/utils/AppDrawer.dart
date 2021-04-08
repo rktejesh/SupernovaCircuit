@@ -6,18 +6,26 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
+  String _user = "Username";
+  String _userEmail = "useremail@gmail.com";
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           UserAccountsDrawerHeader(
-            currentAccountPicture: Image.asset("lib/src/assets/images/coding-bootcamp-motion-poster-design-template-eed37e06b3bbfc660c8a6dd06c462820.jpg",),
-            accountName: Text("Tejesh Reddy"),
-            accountEmail: Text("rk.tejesh@gmail.com"),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+            ),
+            currentAccountPicture: Image.asset(
+              "lib/src/assets/images/coding-bootcamp-motion-poster-design-template-eed37e06b3bbfc660c8a6dd06c462820.jpg",
+            ),
+            accountName: Text(_user),
+            accountEmail: Text(_userEmail),
           ),
-          Text('Hello'),
-          Text('Hiii')
+          Text(''),
+          Text('')
         ],
       ),
     );
