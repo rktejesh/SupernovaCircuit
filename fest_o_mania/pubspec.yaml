@@ -11,6 +11,9 @@ dependencies:
     sdk: flutter
   adobe_xd: ^1.0.0+1
   cupertino_icons: ^1.0.1
+  firebase_auth: ^1.0.2
+  firebase_core: ^1.0.3
+  firebase_database: ^6.1.2
   url_launcher: ^6.0.3
   transformer_page_view: ^0.1.6
   smooth_page_indicator: ^0.2.3
@@ -19,6 +22,7 @@ dependencies:
   sliver_header_delegate: ^0.0.4
   material_floating_search_bar: ^0.3.3
   email_validator: ^2.0.1
+  form_field_validator: ^1.1.0
   sliver_tools: ^0.2.1
   flutter_swiper_null_safety:
     git:
