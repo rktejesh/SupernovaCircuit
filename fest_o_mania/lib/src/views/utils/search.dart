@@ -7,9 +7,11 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
+  String searchBarTitle = "";
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
+      title: Text(searchBarTitle),
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       transitionDuration: const Duration(milliseconds: 800),
       transitionCurve: Curves.easeInOut,
@@ -22,7 +24,8 @@ class _SearchBarState extends State<SearchBar> {
       transition: CircularFloatingSearchBarTransition(),
       actions: [
         FloatingSearchBarAction(
-          showIfOpened: false,
+          showIfClosed: true,
+          showIfOpened:false,
           child: CircularButton(
             icon: const Icon(Icons.search),
             onPressed: () {},

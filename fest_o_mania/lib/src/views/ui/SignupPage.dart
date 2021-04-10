@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fest_o_mania/src/views/ui/MainPage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class SignupPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SignupPageState extends State<SignupPage> {
   String _email = "";
   String _password = "";
   String _confirmPassword = "";
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   User user;
   Timer timer;
 
@@ -27,7 +27,7 @@ class _SignupPageState extends State<SignupPage> {
           return BackdropFilter(
               child: AlertDialog(
                 content: Text(
-                    "An Email has been sent to ${user.email} please varify"),
+                    "An Email has been sent to ${user.email} please verify"),
                 actions: [
                   TextButton(
                     child: Text('ok'),
@@ -273,7 +273,7 @@ class _SignupPageState extends State<SignupPage> {
                           //RequiredValidator(errorText: "Required"),
                         validator: (_confirmPassword) =>
                             MatchValidator(errorText: "Password did not matched!")
-                           .validateMatch("__confirmPassword", "_password"),
+                           .validateMatch(_password, _confirmPassword),
 
 
                     ),
@@ -298,7 +298,6 @@ class _SignupPageState extends State<SignupPage> {
                             ]),
                         child: TextButton(
                           onPressed: () {
-
                               auth.createUserWithEmailAndPassword(
                                       email: _email, password: _password)
                                       .then((_) {
@@ -311,11 +310,10 @@ class _SignupPageState extends State<SignupPage> {
                                     timer.cancel();
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
-                                            builder: (context) => MainPageUpcoming())
+                                            builder: (context) => LandingPage())
                                     );
                                   }
                                 }
-
                                 timer =
                                     Timer.periodic(Duration(seconds: 5), (timer) {
                                   checkEmailVerified();
