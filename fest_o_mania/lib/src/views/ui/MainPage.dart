@@ -97,7 +97,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                               indicator: BubbleTabIndicator(
                                 indicatorHeight: 60,
                                 indicatorRadius: 10,
-                                insets: EdgeInsets.only(left: 30, right: 30),
+                                insets: EdgeInsets.only(left: 10, right: 10),
                                 indicatorColor: Colors.black12,
                                 tabBarIndicatorSize: TabBarIndicatorSize.tab,
                               ),
@@ -157,7 +157,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                                     fit: BoxFit.fill
                                 ),
                                 borderRadius: const BorderRadius.all(
-                                  Radius.circular(25.0),
+                                  Radius.circular(15.0),
                                 ),
                               ),
                             ),
@@ -178,7 +178,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                                     image: AssetImage(LiveEventImages[index]),
                                     fit: BoxFit.fill),
                                 borderRadius: const BorderRadius.all(
-                                  Radius.circular(25.0),
+                                  Radius.circular(15.0),
                                 ),
                               ),
                             ),
@@ -199,7 +199,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                                     image: AssetImage(UpcomingEventImages[index]),
                                     fit: BoxFit.fill),
                                 borderRadius: const BorderRadius.all(
-                                  Radius.circular(25.0),
+                                  Radius.circular(15.0),
                                 ),
                               ),
                             ),

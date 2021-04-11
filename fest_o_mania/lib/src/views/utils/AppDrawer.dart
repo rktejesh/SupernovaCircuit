@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
 import 'package:flutter/material.dart';
 import 'package:fest_o_mania/src/views/ui/CtfEvent.dart';
 import 'package:fest_o_mania/src/views/ui/RegisterClgEvent.dart';
@@ -17,6 +18,7 @@ class _AppDrawerState extends State<AppDrawer> {
   Future<void> _signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
+      loading = false;
     } catch (e) {
       print(e); // TODO: show dialog with error
     }

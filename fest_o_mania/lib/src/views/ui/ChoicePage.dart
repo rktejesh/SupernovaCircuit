@@ -9,8 +9,11 @@ import 'package:fest_o_mania/src/views/ui/LoginPage.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:github_sign_in/github_sign_in.dart';
+import 'package:fest_o_mania/src/views/utils/loading.dart';
 
+
+//Hides keyboard since no input is required
 void hideKeyboard(BuildContext context) {
   SystemChannels.textInput.invokeMethod('TextInput.hide');
   FocusScope.of(context).requestFocus(FocusNode());
@@ -20,16 +23,30 @@ class ChoicePage extends StatefulWidget {
   @override
   _ChoicePageState createState() => _ChoicePageState();
 }
-
+bool loading = false;
 class _ChoicePageState extends State<ChoicePage> {
-  Future<User> signInWithGoogle() async {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  UserCredential user;
+  //Authentication for github
+  Future<UserCredential> signInWithGitHub() async {
+  final GitHubSignIn gitHubSignIn = GitHubSignIn(
+      clientId: "6296142f6ced441635e8",
+      clientSecret: "f51072121bf6b004bca22f2ca300a64f418e3b39",
+      redirectUrl: 'https://supernova-433f4.firebaseapp.com/__/auth/handler');
+  final result = await gitHubSignIn.signIn(context);
+  final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
+  return await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+}
+
+  //Authentication for google
+  Future<UserCredential> signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount googleSignInAccount =
     await googleSignIn.signIn();
     if (googleSignInAccount != null) {
+      loading = true;
       final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
-
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
@@ -39,32 +56,46 @@ class _ChoicePageState extends State<ChoicePage> {
         await FirebaseAuth.instance.signInWithCredential(credential);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
+          loading = false;
           // handle the error here
         }
         else if (e.code == 'invalid-credential') {
+          loading = false;
           // handle the error here
         }
       } catch (e) {
+        loading = false;
         // handle the error here
       }
     }
+    return user;
   }
+
+  //Authentication for unsigned users
   Future<void> _signInAnonymously() async {
     try {
-      await FirebaseAuth.instance.signInAnonymously();
+      setState(() {
+        loading = true;
+      });
+      await _firebaseAuth.signInAnonymously();
     } catch (e) {
-      print(e); // TODO: show dialog with error
+      setState(() {
+        loading = false;
+        print(e);
+      });
     }
+    return user;
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: const Color(0xff1c69f0),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
-            padding: const EdgeInsets.all(60.0),
+            padding: const EdgeInsets.only(bottom:50.0),
             child: AppLogo1(),
           ),
           Container(
@@ -117,7 +148,7 @@ class _ChoicePageState extends State<ChoicePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(20),
                   child: SizedBox(
                     width: double.infinity,
                     child: Container(
@@ -254,7 +285,7 @@ class _ChoicePageState extends State<ChoicePage> {
                                     borderRadius: BorderRadius.circular(15))),
                           ),
                           onPressed: (){
-
+                            signInWithGitHub();
                           },
                         ),
                         decoration: BoxDecoration(

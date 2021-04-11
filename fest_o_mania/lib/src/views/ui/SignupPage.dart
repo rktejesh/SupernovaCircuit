@@ -320,7 +320,6 @@ class _SignupPageState extends State<SignupPage> {
                                 });
                               });
                               _showDialog();
-
                           },
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(EdgeInsets.only(
