@@ -8,19 +8,19 @@ class AppLogo extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(padding: EdgeInsets.all(10),
+              Padding(padding: EdgeInsets.only(left: 10),
                 child: SvgPicture.string(
                   _svg_snczmf,
                   allowDrawingOutsideViewBox: true,
                   fit: BoxFit.fill,
                 ),
               ),
-              Padding(padding: EdgeInsets.all(10),
+              Padding(padding: EdgeInsets.only(left:10),
                 child: Text(
                   'Fest-O-Mania',
                   style: TextStyle(
                       fontFamily: 'Forte',
-                      fontSize: 40,
+                      fontSize: 35,
                       color: Colors.white
                   ),
                 ),
@@ -40,14 +40,14 @@ class AppLogo1 extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(padding: EdgeInsets.all(10),
+            Padding(padding: EdgeInsets.only(right:10),
               child: SvgPicture.string(
                 _svg_3hcuir,
                 allowDrawingOutsideViewBox: true,
                 fit: BoxFit.fill,
               ),
             ),
-            Padding(padding: EdgeInsets.all(10),
+            Padding(padding: EdgeInsets.only(left:10),
               child: Text(
                 'Fest-O-Mania',
                 style: TextStyle(

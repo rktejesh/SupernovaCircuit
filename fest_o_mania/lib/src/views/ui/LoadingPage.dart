@@ -1,6 +1,6 @@
+import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fest_o_mania/src/views/utils/Logo.dart';
-import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
 import 'dart:async';
 
 class LoadingPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _LoadingPageState extends State<LoadingPage> {
   }
   route() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => ChoicePage()
+        builder: (context) => LandingPage()
     )
     );
   }
