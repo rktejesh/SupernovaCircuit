@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/SignupPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fest_o_mania/src/views/utils/Logo.dart';
 import 'package:fest_o_mania/src/views/ui/LoginPage.dart';
@@ -86,7 +87,36 @@ class _ChoicePageState extends State<ChoicePage> {
     }
     return user;
   }
-
+  //Authentication for Facebook user
+  bool _isLogin = false;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  FacebookLogin _facebookLogin = FacebookLogin();
+  User _user;
+  Future _handleLogin() async {
+    FacebookLoginResult _result = await _facebookLogin.logIn(['email']);
+    switch(_result.status)
+    {
+      case FacebookLoginStatus.cancelledByUser:
+      break;
+      case FacebookLoginStatus.error:
+      break;
+      case FacebookLoginStatus.loggedIn:
+      await (_loginWithFacebook(_result));
+      break;
+      
+    }
+  }
+  Future _loginWithFacebook(FacebookLoginResult _result) async {
+     FacebookAccessToken _accessToken = _result.accessToken;
+     AuthCredential _credential = 
+        FacebookAuthProvider.credential(_accessToken.token);
+    var a = await _auth.signInWithCredential(_credential);
+    setState(() {
+      _isLogin = true;
+      _user = a.user;
+    });
+  }
+  //Authentication for Facebook user ends here
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
@@ -253,8 +283,8 @@ class _ChoicePageState extends State<ChoicePage> {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                           ),
-                          onPressed: () {
-
+                          onPressed: ()async {
+                              await _handleLogin();
                           },
                         ),
                         decoration: BoxDecoration(
