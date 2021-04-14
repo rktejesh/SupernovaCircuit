@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
