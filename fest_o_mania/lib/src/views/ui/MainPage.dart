@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'config.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:fest_o_mania/src/views/utils/AppDrawer.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sliver_header_delegate/sliver_header_delegate.dart';
 import 'package:fest_o_mania/src/views/utils/search.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -19,6 +17,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
   ScrollController _scrollController;
   TabController _tabController;
   int currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -26,8 +25,20 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
       keepScrollOffset: true,
       initialScrollOffset: 0,
     );
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+      initialIndex: 0,
+    );
     setState(() {});
+  }
+
+  bool _visible = false;
+
+  void onPressed() {
+    setState(() {
+      _visible = !_visible;
+    });
   }
 
   void changePage(int index) {
@@ -43,154 +54,164 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
     super.dispose();
   }
 
+  double selected = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        drawer: AppDrawer(),
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            NestedScrollView(
-              controller: _scrollController,
-              headerSliverBuilder: (context, value) {
-                return [
-                  SliverAppBar(
-                    expandedHeight: 300.0,
-                    collapsedHeight: 10,
-                    toolbarHeight: 0,
-                    floating: false,
-                    pinned: false,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Slideshow(),
+      child: Theme(
+        data: ThemeData(
+          primaryColor: Colors.white
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          drawer: AppDrawer(),
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              NestedScrollView(
+                controller: _scrollController,
+                headerSliverBuilder: (context, value) {
+                  return [
+                    SliverAppBar(
+                      floating: false,
+                      pinned: false,
+                      expandedHeight: 50,
                     ),
-                  ),
-                  SliverPersistentHeader(
-                    delegate: FlexibleHeaderDelegate(
-                      children: [
-                        TabBar(
-                          indicator: BubbleTabIndicator(
-                            indicatorHeight: 60,
-                            indicatorRadius: 10,
-                            insets: EdgeInsets.only(left: 30, right: 30),
-                            indicatorColor: Colors.black12,
-                            tabBarIndicatorSize: TabBarIndicatorSize.tab,
-                          ),
-                          overlayColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                          enableFeedback: true,
-                          controller: _tabController,
-                          tabs: [
-                            Tab(
-                              child: SvgPicture.string(
-                                bookmark,
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Tab(
-                              child: Image.asset(
-                                "lib/src/assets/images/live.png",
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Tab(
-                              child: Image.asset(
-                                "lib/src/assets/images/2496466-200.png",
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ],
+                    SliverAppBar(
+                      leading: Container(),
+                        expandedHeight: 300.0,
+                        floating: false,
+                        pinned: true,
+                        flexibleSpace: FlexibleSpaceBar(
+                          background: Slideshow(),
                         ),
-                      ],
-                      expandedHeight: 100,
-                      collapsedHeight: 80,
-                      statusBarHeight: 0,
-                      collapsedElevation: 0,
+                      ),
+                    SliverPinnedHeader(
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: TabBar(
+                              indicator: BubbleTabIndicator(
+                                indicatorHeight: 60,
+                                indicatorRadius: 10,
+                                insets: EdgeInsets.only(left: 10, right: 10),
+                                indicatorColor: Colors.black12,
+                                tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                              ),
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              enableFeedback: true,
+                              controller: _tabController,
+                              tabs: [
+                                Tab(
+                                  child: SvgPicture.string(
+                                    bookmark,
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Tab(
+                                  child: Image.asset(
+                                    "lib/src/assets/images/live.png",
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Tab(
+                                  child: Image.asset(
+                                    "lib/src/assets/images/2496466-200.png",
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ),
+                        color: Colors.white,
+                      ),
                     ),
-                    pinned: true,
-                    floating: true,
+                  ];
+                },
+                body: Container(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      ListView.builder(
+                        itemCount: SavedEventImages.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding:
+                                EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                            height: 240,
+                            width: double.infinity,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(SavedEventImages[index]),
+                                    fit: BoxFit.fill
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        itemCount: LiveEventImages.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding:
+                                EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                            height: 240,
+                            width: double.infinity,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(LiveEventImages[index]),
+                                    fit: BoxFit.fill),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      ListView.builder(
+                        itemCount: UpcomingEventImages.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding:
+                                EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                            height: 240,
+                            width: double.infinity,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(UpcomingEventImages[index]),
+                                    fit: BoxFit.fill),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ];
-              },
-              body: Container(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    ListView.builder(
-                      itemCount: SavedEventImages.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding:
-                              EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                          height: 240,
-                          width: double.infinity,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(SavedEventImages[index]),
-                                  fit: BoxFit.fill),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(25.0),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: LiveEventImages.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding:
-                              EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                          height: 240,
-                          width: double.infinity,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(LiveEventImages[index]),
-                                  fit: BoxFit.fill),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(25.0),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: UpcomingEventImages.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding:
-                              EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                          height: 240,
-                          width: double.infinity,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(UpcomingEventImages[index]),
-                                  fit: BoxFit.fill),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(25.0),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
                 ),
               ),
-            ),
-          ],
+              SearchBar(
+                searchBarTitle: "FestOMania",
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -205,30 +226,31 @@ class Slideshow extends StatefulWidget {
 class _SlideshowState extends State<Slideshow> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 300,
-          child: Swiper(
-            loop: true,
-            autoplay: true,
-            itemBuilder: (BuildContext context, int index) {
-              return new Image.asset(
+    return SizedBox(
+      height: 300,
+      child: Swiper(
+        loop: true,
+        autoplay: true,
+        itemBuilder: (BuildContext context, int index) {
+          return Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
                 SlideshowImages[index],
                 fit: BoxFit.fill,
-              );
-            },
-            itemCount: SlideshowImages.length,
-            pagination: new SwiperPagination(
-                margin: EdgeInsets.all(10), builder: SwiperPagination.dots),
-            indicatorLayout: PageIndicatorLayout.SCALE,
-            layout: SwiperLayout.DEFAULT,
-            control: new SwiperControl(color: Colors.white60),
-            autoplayDisableOnInteraction: true,
-            autoplayDelay: 4000,
-          ),
-        ),
-      ],
+              ),
+            ],
+          );
+        },
+        itemCount: SlideshowImages.length,
+        pagination: new SwiperPagination(
+            margin: EdgeInsets.all(10), builder: SwiperPagination.dots),
+        indicatorLayout: PageIndicatorLayout.SCALE,
+        layout: SwiperLayout.DEFAULT,
+        control: new SwiperControl(color: Colors.white60),
+        autoplayDisableOnInteraction: true,
+        autoplayDelay: 4000,
+      ),
     );
   }
 }

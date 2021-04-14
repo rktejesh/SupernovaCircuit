@@ -9,6 +9,7 @@ class App extends StatelessWidget {
       title: 'ThemePage',
       theme: ThemeData(
         fontFamily: 'Alegreya',
+        errorColor: Colors.red,
       ),
       home: LoadingPage(),
     );

@@ -1,32 +1,216 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/SignupPage.dart';
+import 'package:fest_o_mania/src/views/utils/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fest_o_mania/src/views/utils/Logo.dart';
 import 'package:fest_o_mania/src/views/ui/LoginPage.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:github_sign_in/github_sign_in.dart';
+import 'package:fest_o_mania/src/views/utils/loading.dart';
+
+//Hides keyboard since no input is required
+void hideKeyboard(BuildContext context) {
+  SystemChannels.textInput.invokeMethod('TextInput.hide');
+  FocusScope.of(context).requestFocus(FocusNode());
+}
 
 class ChoicePage extends StatefulWidget {
   @override
   _ChoicePageState createState() => _ChoicePageState();
 }
 
+bool loading = false;
 class _ChoicePageState extends State<ChoicePage> {
+  String errorText = "";
+  _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return BackdropFilter(
+              child: AlertDialog(
+                content: Text(
+                    errorText),
+                actions: [
+                  TextButton(
+                    child: Text('ok'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
+        });
+  }
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  UserCredential user;
+  //Authentication for github
+  Future<void> signInWithGitHub() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+      final GitHubSignIn gitHubSignIn = GitHubSignIn(
+          clientId: "6296142f6ced441635e8",
+          clientSecret: "f51072121bf6b004bca22f2ca300a64f418e3b39",
+          redirectUrl:
+              'https://supernova-433f4.firebaseapp.com/__/auth/handler');
+      final result = await gitHubSignIn.signIn(context);
+      final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
+      await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        setState(() {
+          loading = false;
+          errorText="An account already exists with this email.";
+          _showDialog();
+        });
+      }
+      else if (e.code == 'invalid-credential') {
+        loading = false;
+        errorText="The username or password is incorrect.";
+        _showDialog();
+      }
+    } catch (e) {
+      loading = false;
+      errorText="Error could not sign in. Please try again.";
+      _showDialog();
+    }
+  }
+
+  //Authentication for google
+  Future<UserCredential> signInWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount googleSignInAccount =
+    await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      setState(() {
+        loading = true;
+      });
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      try {
+        setState(() {
+          loading = true;
+        });
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'account-exists-with-different-credential') {
+          setState(() {
+            loading = false;
+            errorText="An account already exists with this email.";
+            _showDialog();
+          });
+        }
+        else if (e.code == 'invalid-credential') {
+          loading = false;
+          errorText="The username or password is incorrect.";
+          _showDialog();
+        }
+      } catch (e) {
+        loading = false;
+        errorText="Error could not sign in. Please try again.";
+        _showDialog();
+      }
+    }
+    return user;
+  }
+
+  //Authentication for unsigned users
+  Future<void> _signInAnonymously() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+      await _firebaseAuth.signInAnonymously();
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+    } catch (e) {
+      setState(() {
+        loading = false;
+        errorText="Error could not sign in. Please try again.";
+        _showDialog();
+      });
+    }
+  }
+  //Authentication for Facebook user
+  FacebookLogin _facebookLogin = FacebookLogin();
+  Future _handleLogin() async {
+    FacebookLoginResult _result = await _facebookLogin.logIn(['email']);
+    switch(_result.status)
+    {
+      case FacebookLoginStatus.cancelledByUser:
+        loading = false;
+      break;
+      case FacebookLoginStatus.error:
+        loading = false;
+        errorText="Error could not sign in. Please try again.";
+        _showDialog();
+      break;
+      case FacebookLoginStatus.loggedIn:
+      await (_loginWithFacebook(_result));
+      break;
+      
+    }
+  }
+  Future _loginWithFacebook(FacebookLoginResult _result) async {
+    loading = true;
+    try {
+      setState(() {
+        loading = true;
+      });
+      FacebookAccessToken _accessToken = _result.accessToken;
+      AuthCredential _credential =
+          FacebookAuthProvider.credential(_accessToken.token);
+      await _firebaseAuth.signInWithCredential(_credential);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        setState(() {
+          loading = false;
+          errorText="An account already exists with this email.";
+          _showDialog();
+        });
+      }
+      else if (e.code == 'invalid-credential') {
+        loading = false;
+        errorText="The username or password is incorrect.";
+        _showDialog();
+      }
+    } catch (e) {
+      loading = false;
+      errorText="Error could not sign in. Please try again.";
+      _showDialog();
+    }
+  }
+  //Authentication for Facebook user ends here
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: const Color(0xff1c69f0),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
-            padding: const EdgeInsets.all(60.0),
+            padding: const EdgeInsets.only(bottom:50.0),
             child: AppLogo1(),
           ),
           Container(
             padding: EdgeInsets.all(40),
             width: double.infinity,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
                   width: double.infinity,
@@ -47,14 +231,17 @@ class _ChoicePageState extends State<ChoicePage> {
                       ),
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage(),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LoginPage(),));
                         },
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(
+                              10)),
                           backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
                         ),
                         child: Text(
                           'Login',
@@ -69,7 +256,7 @@ class _ChoicePageState extends State<ChoicePage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(20),
                   child: SizedBox(
                     width: double.infinity,
                     child: Container(
@@ -87,14 +274,17 @@ class _ChoicePageState extends State<ChoicePage> {
                       ),
                       child: OutlinedButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignupPage(),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignupPage(),));
                         },
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(
+                              10)),
                           backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
                         ),
                         child: Text(
                           'SignUp',
@@ -134,16 +324,17 @@ class _ChoicePageState extends State<ChoicePage> {
                             fit: BoxFit.fill,
                           ),
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
-                            backgroundColor: MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                            padding: MaterialStateProperty.all(EdgeInsets.only(
+                                top: 10, bottom: 10, left: 20, right: 20)),
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.white),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
                           ),
-                          onPressed: () {
-
-                          },
+                          onPressed: signInWithGoogle,
                         ),
-                        decoration:BoxDecoration(
+                        decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromRGBO(149, 157, 165, 0.1),
@@ -162,16 +353,20 @@ class _ChoicePageState extends State<ChoicePage> {
                             fit: BoxFit.fill,
                           ),
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
-                            backgroundColor: MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                            padding: MaterialStateProperty.all(EdgeInsets.only(
+                                top: 10, bottom: 10, left: 20, right: 20)),
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.white),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
                           ),
-                          onPressed: () {
-
+                          onPressed: ()async {
+                            loading = true;
+                            await _handleLogin();
                           },
                         ),
-                        decoration:BoxDecoration(
+                        decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromRGBO(149, 157, 165, 0.1),
@@ -190,16 +385,19 @@ class _ChoicePageState extends State<ChoicePage> {
                             fit: BoxFit.fill,
                           ),
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20)),
-                            backgroundColor: MaterialStateProperty.all(Colors.white),
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                            padding: MaterialStateProperty.all(EdgeInsets.only(
+                                top: 10, bottom: 10, left: 20, right: 20)),
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.white),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
                           ),
-                          onPressed: () {
-
+                          onPressed: (){
+                            signInWithGitHub();
                           },
                         ),
-                        decoration:BoxDecoration(
+                        decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromRGBO(149, 157, 165, 0.1),
@@ -215,7 +413,7 @@ class _ChoicePageState extends State<ChoicePage> {
                 SizedBox(
                   width: double.infinity,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 80, right: 80,top: 20),
+                    padding: EdgeInsets.only(left: 80, right: 80, top: 20),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.all(
@@ -229,16 +427,16 @@ class _ChoicePageState extends State<ChoicePage> {
                             )
                           ]
                       ),
-                      child:OutlinedButton(
-                        onPressed: () {
-
-                        },
+                      child: OutlinedButton(
+                        onPressed: _signInAnonymously,
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(
+                              10)),
                           backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25))),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25))),
                         ),
                         child: Text(
                           'Skip for Now',
@@ -255,7 +453,8 @@ class _ChoicePageState extends State<ChoicePage> {
               ],
             ),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(60), topLeft: Radius.circular(60)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(60), topLeft: Radius.circular(60)),
               color: const Color(0xfff4f5fa),
               border: Border.all(width: 1.0, color: const Color(0xff707070)),
             ),
