@@ -7,10 +7,16 @@ class DatabaseService {
   Future updateUserData(
       String name,
       String email,
+      String userUid,
       ) async {
     return await userCollection.doc(uid).set({
+      'userUid': userUid,
       'name': name,
       'email': email,
     });
   }
+}
+
+class EventDatabaseService {
+
 }

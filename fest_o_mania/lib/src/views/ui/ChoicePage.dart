@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/SignupPage.dart';
 import 'package:fest_o_mania/src/views/utils/database.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -54,16 +53,18 @@ class _ChoicePageState extends State<ChoicePage> {
   //Authentication for github
   Future<void> signInWithGitHub() async {
     try {
+      setState(() {
+        loading = true;
+      });
       final GitHubSignIn gitHubSignIn = GitHubSignIn(
           clientId: "6296142f6ced441635e8",
           clientSecret: "f51072121bf6b004bca22f2ca300a64f418e3b39",
           redirectUrl:
               'https://supernova-433f4.firebaseapp.com/__/auth/handler');
       final result = await gitHubSignIn.signIn(context);
-      final AuthCredential githubAuthCredential =
-          GithubAuthProvider.credential(result.token);
-      return await FirebaseAuth.instance
-          .signInWithCredential(githubAuthCredential);
+      final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
+      await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         setState(() {
@@ -90,7 +91,9 @@ class _ChoicePageState extends State<ChoicePage> {
     final GoogleSignInAccount googleSignInAccount =
     await googleSignIn.signIn();
     if (googleSignInAccount != null) {
-      loading = true;
+      setState(() {
+        loading = true;
+      });
       final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -98,9 +101,12 @@ class _ChoicePageState extends State<ChoicePage> {
         idToken: googleSignInAuthentication.idToken,
       );
       try {
+        setState(() {
+          loading = true;
+        });
         final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email);
+        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           setState(() {
@@ -130,6 +136,7 @@ class _ChoicePageState extends State<ChoicePage> {
         loading = true;
       });
       await _firebaseAuth.signInAnonymously();
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
     } catch (e) {
       setState(() {
         loading = false;
@@ -137,7 +144,6 @@ class _ChoicePageState extends State<ChoicePage> {
         _showDialog();
       });
     }
-    return user;
   }
   //Authentication for Facebook user
   bool _isLogin = false;
@@ -163,10 +169,14 @@ class _ChoicePageState extends State<ChoicePage> {
   Future _loginWithFacebook(FacebookLoginResult _result) async {
     loading = true;
     try {
+      setState(() {
+        loading = true;
+      });
       FacebookAccessToken _accessToken = _result.accessToken;
       AuthCredential _credential =
           FacebookAuthProvider.credential(_accessToken.token);
       var a = await _firebaseAuth.signInWithCredential(_credential);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         setState(() {

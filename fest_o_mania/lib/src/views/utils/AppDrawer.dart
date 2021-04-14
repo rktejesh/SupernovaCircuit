@@ -17,8 +17,8 @@ class _AppDrawerState extends State<AppDrawer> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   Future<void> _signOut() async {
     try {
-      await FirebaseAuth.instance.signOut();
       loading = false;
+      await FirebaseAuth.instance.signOut();
     } catch (e) {
       print(e); // TODO: show dialog with error
     }

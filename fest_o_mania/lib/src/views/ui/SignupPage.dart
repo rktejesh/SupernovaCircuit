@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:fest_o_mania/src/views/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,11 +38,8 @@ class _SignupPageState extends State<SignupPage> {
     user.updateProfile(displayName: _username);
     await user.reload();
     if (user.emailVerified) {
+      await DatabaseService(uid: user.uid).updateUserData(user.displayName, user.email,user.uid);
       timer.cancel();
-      await DatabaseService(uid: user.uid)
-          .updateUserData(user.displayName, user.email);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LandingPage()));
     }
   }
 
