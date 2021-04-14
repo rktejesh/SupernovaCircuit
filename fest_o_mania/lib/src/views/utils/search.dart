@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-class SearchBar extends StatefulWidget {
-  @override
-  _SearchBarState createState() => _SearchBarState();
-}
-
-class _SearchBarState extends State<SearchBar> {
-  String searchBarTitle = "";
+class SearchBar extends StatelessWidget{
+  final String searchBarTitle;
+  SearchBar({
+    this.searchBarTitle
+  });
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
-      title: Text(searchBarTitle),
+      title: Text(
+          searchBarTitle,
+        textAlign: TextAlign.center,
+      ),
+      height: 55,
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       transitionDuration: const Duration(milliseconds: 800),
       transitionCurve: Curves.easeInOut,
       physics: const BouncingScrollPhysics(),
       openAxisAlignment: 0.0,
+      hintStyle: TextStyle(),
+      margins: EdgeInsets.all(0),
       elevation: 0,
       debounceDelay: const Duration(milliseconds: 500),
-      onQueryChanged: (query) {
-      },
+      onQueryChanged: (query) {},
       transition: CircularFloatingSearchBarTransition(),
       actions: [
         FloatingSearchBarAction(
           showIfClosed: true,
-          showIfOpened:false,
+          showIfOpened: false,
           child: CircularButton(
             icon: const Icon(Icons.search),
             onPressed: () {},

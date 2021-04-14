@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'config.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:fest_o_mania/src/views/utils/AppDrawer.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fest_o_mania/src/views/utils/search.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'package:transformer_page_view/transformer_page_view.dart';
 
 class MainPageUpcoming extends StatefulWidget {
   @override
@@ -59,7 +57,6 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
   double selected = 0;
   @override
   Widget build(BuildContext context) {
-    final double pinnedHeaderHeight = MediaQuery.of(context).padding.top;
     return SafeArea(
       child: Theme(
         data: ThemeData(
@@ -210,7 +207,9 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                   ),
                 ),
               ),
-              SearchBar()
+              SearchBar(
+                searchBarTitle: "FestOMania",
+              )
             ],
           ),
         ),

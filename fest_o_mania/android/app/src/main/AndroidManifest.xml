@@ -4,9 +4,10 @@
   <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="fest_o_mania"
-        android:icon="@mipmap/ic_launcher">
-        <activity
+       android:label="fest_o_mania"
+       android:usesCleartextTraffic="true"
+       android:icon="@mipmap/ic_launcher">
+       <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

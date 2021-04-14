@@ -29,7 +29,6 @@ class RegisterClgEvent extends StatefulWidget {
 }
 
 class _RegisterClgEventState extends State<RegisterClgEvent> {
-  final _formKey = GlobalKey<FormState>();
   final dbRef = FirebaseDatabase.instance.reference().child("Live");
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/SignupPage.dart';
+import 'package:fest_o_mania/src/views/utils/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -13,7 +14,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:github_sign_in/github_sign_in.dart';
 import 'package:fest_o_mania/src/views/utils/loading.dart';
 
-
 //Hides keyboard since no input is required
 void hideKeyboard(BuildContext context) {
   SystemChannels.textInput.invokeMethod('TextInput.hide');
@@ -24,20 +24,66 @@ class ChoicePage extends StatefulWidget {
   @override
   _ChoicePageState createState() => _ChoicePageState();
 }
+
 bool loading = false;
 class _ChoicePageState extends State<ChoicePage> {
+  String errorText = "";
+  _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return BackdropFilter(
+              child: AlertDialog(
+                content: Text(
+                    errorText),
+                actions: [
+                  TextButton(
+                    child: Text('ok'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
+        });
+  }
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   UserCredential user;
   //Authentication for github
-  Future<UserCredential> signInWithGitHub() async {
-  final GitHubSignIn gitHubSignIn = GitHubSignIn(
-      clientId: "6296142f6ced441635e8",
-      clientSecret: "f51072121bf6b004bca22f2ca300a64f418e3b39",
-      redirectUrl: 'https://supernova-433f4.firebaseapp.com/__/auth/handler');
-  final result = await gitHubSignIn.signIn(context);
-  final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
-  return await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
-}
+  Future<void> signInWithGitHub() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+      final GitHubSignIn gitHubSignIn = GitHubSignIn(
+          clientId: "6296142f6ced441635e8",
+          clientSecret: "f51072121bf6b004bca22f2ca300a64f418e3b39",
+          redirectUrl:
+              'https://supernova-433f4.firebaseapp.com/__/auth/handler');
+      final result = await gitHubSignIn.signIn(context);
+      final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
+      await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        setState(() {
+          loading = false;
+          errorText="An account already exists with this email.";
+          _showDialog();
+        });
+      }
+      else if (e.code == 'invalid-credential') {
+        loading = false;
+        errorText="The username or password is incorrect.";
+        _showDialog();
+      }
+    } catch (e) {
+      loading = false;
+      errorText="Error could not sign in. Please try again.";
+      _showDialog();
+    }
+  }
 
   //Authentication for google
   Future<UserCredential> signInWithGoogle() async {
@@ -45,7 +91,9 @@ class _ChoicePageState extends State<ChoicePage> {
     final GoogleSignInAccount googleSignInAccount =
     await googleSignIn.signIn();
     if (googleSignInAccount != null) {
-      loading = true;
+      setState(() {
+        loading = true;
+      });
       final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -53,20 +101,28 @@ class _ChoicePageState extends State<ChoicePage> {
         idToken: googleSignInAuthentication.idToken,
       );
       try {
-        final UserCredential userCredential =
+        setState(() {
+          loading = true;
+        });
         await FirebaseAuth.instance.signInWithCredential(credential);
+        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
-          loading = false;
-          // handle the error here
+          setState(() {
+            loading = false;
+            errorText="An account already exists with this email.";
+            _showDialog();
+          });
         }
         else if (e.code == 'invalid-credential') {
           loading = false;
-          // handle the error here
+          errorText="The username or password is incorrect.";
+          _showDialog();
         }
       } catch (e) {
         loading = false;
-        // handle the error here
+        errorText="Error could not sign in. Please try again.";
+        _showDialog();
       }
     }
     return user;
@@ -79,26 +135,28 @@ class _ChoicePageState extends State<ChoicePage> {
         loading = true;
       });
       await _firebaseAuth.signInAnonymously();
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
     } catch (e) {
       setState(() {
         loading = false;
-        print(e);
+        errorText="Error could not sign in. Please try again.";
+        _showDialog();
       });
     }
-    return user;
   }
   //Authentication for Facebook user
-  bool _isLogin = false;
-  FirebaseAuth _auth = FirebaseAuth.instance;
   FacebookLogin _facebookLogin = FacebookLogin();
-  User _user;
   Future _handleLogin() async {
     FacebookLoginResult _result = await _facebookLogin.logIn(['email']);
     switch(_result.status)
     {
       case FacebookLoginStatus.cancelledByUser:
+        loading = false;
       break;
       case FacebookLoginStatus.error:
+        loading = false;
+        errorText="Error could not sign in. Please try again.";
+        _showDialog();
       break;
       case FacebookLoginStatus.loggedIn:
       await (_loginWithFacebook(_result));
@@ -107,14 +165,34 @@ class _ChoicePageState extends State<ChoicePage> {
     }
   }
   Future _loginWithFacebook(FacebookLoginResult _result) async {
-     FacebookAccessToken _accessToken = _result.accessToken;
-     AuthCredential _credential = 
-        FacebookAuthProvider.credential(_accessToken.token);
-    var a = await _auth.signInWithCredential(_credential);
-    setState(() {
-      _isLogin = true;
-      _user = a.user;
-    });
+    loading = true;
+    try {
+      setState(() {
+        loading = true;
+      });
+      FacebookAccessToken _accessToken = _result.accessToken;
+      AuthCredential _credential =
+          FacebookAuthProvider.credential(_accessToken.token);
+      await _firebaseAuth.signInWithCredential(_credential);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        setState(() {
+          loading = false;
+          errorText="An account already exists with this email.";
+          _showDialog();
+        });
+      }
+      else if (e.code == 'invalid-credential') {
+        loading = false;
+        errorText="The username or password is incorrect.";
+        _showDialog();
+      }
+    } catch (e) {
+      loading = false;
+      errorText="Error could not sign in. Please try again.";
+      _showDialog();
+    }
   }
   //Authentication for Facebook user ends here
   @override
@@ -284,7 +362,8 @@ class _ChoicePageState extends State<ChoicePage> {
                                     borderRadius: BorderRadius.circular(15))),
                           ),
                           onPressed: ()async {
-                              await _handleLogin();
+                            loading = true;
+                            await _handleLogin();
                           },
                         ),
                         decoration: BoxDecoration(
