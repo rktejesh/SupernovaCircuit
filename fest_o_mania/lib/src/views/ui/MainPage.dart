@@ -210,7 +210,9 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                   ),
                 ),
               ),
-              SearchBar()
+              SearchBar(
+                searchBarTitle: "FestOMania",
+              )
             ],
           ),
         ),

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
+import 'package:fest_o_mania/src/views/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:fest_o_mania/src/views/utils/database.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool loading = false;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   String _username = "";
   String _email = "";
@@ -27,7 +30,7 @@ class _SignupPageState extends State<SignupPage> {
           return BackdropFilter(
               child: AlertDialog(
                 content: Text(
-                    "An Email has been sent to ${user.email} please verify"),
+                    "An Email has been sent to $_email please verify"),
                 actions: [
                   TextButton(
                     child: Text('ok'),
@@ -43,7 +46,7 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       backgroundColor: const Color(0xff1c69f0),
       body: SafeArea(
         top: false,
@@ -299,15 +302,17 @@ class _SignupPageState extends State<SignupPage> {
                         child: TextButton(
                           onPressed: () {
                               auth.createUserWithEmailAndPassword(
-                                      email: _email, password: _password)
-                                      .then((_) {
+                                      email: _email, password: _password,)
+                                      .then((_) async {
                                 user = auth.currentUser;
                                 user.sendEmailVerification();
                                 Future<void> checkEmailVerified() async {
                                   user = auth.currentUser;
+                                  user.updateProfile(displayName: _username);
                                   await user.reload();
                                   if (user.emailVerified) {
                                     timer.cancel();
+                                    await DatabaseService(uid: user.uid).updateUserData(user.displayName, user.email);
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (context) => LandingPage())

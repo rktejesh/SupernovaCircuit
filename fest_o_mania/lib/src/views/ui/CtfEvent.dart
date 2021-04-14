@@ -84,7 +84,7 @@ class _CtfEventPageState extends State<CtfEventPage> {
                     ]
                 )
             ),
-            SearchBar(),
+            SearchBar(searchBarTitle: "CTF Events"),
           ],
         ),
       ),

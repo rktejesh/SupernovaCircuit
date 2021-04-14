@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
 import 'package:flutter/material.dart';
 import 'package:fest_o_mania/src/views/ui/CtfEvent.dart';
@@ -15,6 +14,7 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
   Future<void> _signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
@@ -23,8 +23,38 @@ class _AppDrawerState extends State<AppDrawer> {
       print(e); // TODO: show dialog with error
     }
   }
-  String _user = "Username";
-  String _userEmail = "useremail@gmail.com";
+  String _user = FirebaseAuth.instance.currentUser.displayName;
+  String _userEmail = FirebaseAuth.instance.currentUser.email;
+  bool _userStringEmpty = true;
+  bool _userPhotoUrlEmpty = true;
+  bool _userEmailEmpty = true;
+
+  Future<void> _usernameDefined() async {
+    if(_user==null)
+      _userStringEmpty = true;
+    else
+      _userStringEmpty = false;
+  }
+  Future<void> _userPhotoDefined() async {
+    if(auth.currentUser.photoURL==null)
+      _userPhotoUrlEmpty = true;
+    else
+      _userPhotoUrlEmpty = false;
+  }
+  Future<void> _userEmailDefined() async {
+    if(_userEmail==null)
+      _userEmailEmpty = true;
+    else
+      _userEmailEmpty = false;
+  }
+
+  @override
+  void initState() {
+    _usernameDefined();
+    _userPhotoDefined();
+    _userEmailDefined();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -32,13 +62,11 @@ class _AppDrawerState extends State<AppDrawer> {
         children: [
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage(
-                "lib/src/assets/images/coding-bootcamp-motion-poster-design-template-eed37e06b3bbfc660c8a6dd06c462820.jpg",
-              ),
+              backgroundImage: _userPhotoUrlEmpty ? AssetImage("lib/src/assets/images/blank-profile-picture.png") : NetworkImage(auth.currentUser.photoURL),
             ),
-            accountName: Text(_user),
+            accountName: _userStringEmpty ? Text("  "):Text(_user),
             decoration: BoxDecoration(),
-            accountEmail: Text(_userEmail),
+            accountEmail: _userEmailEmpty ? Text("  "):Text(_userEmail),
           ),
           ListTile(
             title: Text('Coding Events'),
@@ -93,3 +121,4 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 }
+

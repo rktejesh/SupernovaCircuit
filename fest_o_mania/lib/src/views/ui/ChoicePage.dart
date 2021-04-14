@@ -89,16 +89,16 @@ class _ChoicePageState extends State<ChoicePage> {
   }
   //Authentication for Facebook user
   bool _isLogin = false;
-  FirebaseAuth _auth = FirebaseAuth.instance;
   FacebookLogin _facebookLogin = FacebookLogin();
-  User _user;
   Future _handleLogin() async {
     FacebookLoginResult _result = await _facebookLogin.logIn(['email']);
     switch(_result.status)
     {
       case FacebookLoginStatus.cancelledByUser:
+        loading = false;
       break;
       case FacebookLoginStatus.error:
+        loading = false;
       break;
       case FacebookLoginStatus.loggedIn:
       await (_loginWithFacebook(_result));
@@ -107,13 +107,13 @@ class _ChoicePageState extends State<ChoicePage> {
     }
   }
   Future _loginWithFacebook(FacebookLoginResult _result) async {
+    loading = true;
      FacebookAccessToken _accessToken = _result.accessToken;
      AuthCredential _credential = 
         FacebookAuthProvider.credential(_accessToken.token);
-    var a = await _auth.signInWithCredential(_credential);
+    var a = await _firebaseAuth.signInWithCredential(_credential);
     setState(() {
       _isLogin = true;
-      _user = a.user;
     });
   }
   //Authentication for Facebook user ends here
@@ -284,7 +284,8 @@ class _ChoicePageState extends State<ChoicePage> {
                                     borderRadius: BorderRadius.circular(15))),
                           ),
                           onPressed: ()async {
-                              await _handleLogin();
+                            loading = true;
+                            await _handleLogin();
                           },
                         ),
                         decoration: BoxDecoration(
