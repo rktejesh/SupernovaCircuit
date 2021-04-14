@@ -12,14 +12,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String errorText;
   _showDialog() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return BackdropFilter(
               child: AlertDialog(
-                content: Text(
-                    "The email or password is invalid."),
+                content: Text(errorText),
                 actions: [
                   TextButton(
                     child: Text('ok'),
@@ -220,11 +220,29 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => LandingPage()));
-                          } catch (e) {
-                            setState(() {
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'invalid-email') {
+                              setState(() {
+                                loading = false;
+                                errorText="The email specified does not exist.";
+                                _showDialog();
+                              });
+                            }
+                            else if (e.code == 'wrong-password') {
                               loading = false;
+                              errorText = "The password is incorrect.";
                               _showDialog();
-                            });
+                            }
+                            else if (e.code == 'user-not-found') {
+                              loading = false;
+                              errorText = "The email or password is incorrect.";
+                              _showDialog();
+                            }
+                            else {
+                              setState(() {
+                                loading = false;
+                              });
+                            }
                           }
                         },
                         style: ButtonStyle(
