@@ -9,6 +9,24 @@ import 'package:sliver_header_delegate/sliver_header_delegate.dart';
 import 'package:fest_o_mania/src/views/utils/search.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MainPageUpcoming(),
+    );
+  }
+}
+
 class MainPageUpcoming extends StatefulWidget {
   @override
   _MainPageUpcomingState createState() => _MainPageUpcomingState();
