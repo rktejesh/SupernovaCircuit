@@ -12,6 +12,11 @@ class SearchBar extends StatelessWidget{
       title: Text(
           searchBarTitle,
         textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 25,
+              fontFamily: "Algreya",
+              fontWeight: FontWeight.bold
+        ),
       ),
       height: 55,
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
