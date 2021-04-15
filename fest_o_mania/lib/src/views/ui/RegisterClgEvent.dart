@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -26,6 +29,7 @@ class RegisterClgEvent extends StatefulWidget {
 }
 
 class _RegisterClgEventState extends State<RegisterClgEvent> {
+  final dbRef = FirebaseDatabase.instance.reference().child("Live");
   @override
   Widget build(BuildContext context) {
     return Scaffold(

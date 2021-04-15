@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './XDsearch.dart';
 import 'package:adobe_xd/page_link.dart';
-import './Hackathon.dart';
+//import 'src/views/ui/Hackathon.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+// ignore: camel_case_types
 class XDevent_page extends StatelessWidget {
   XDevent_page({
     Key key,
