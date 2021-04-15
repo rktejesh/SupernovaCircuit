@@ -6,9 +6,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:fest_o_mania/src/views/utils/database.dart';
 
+
 void main() {
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -76,7 +78,7 @@ class _SignupPageState extends State<SignupPage> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: const Color(0xff1c69f0),
+            backgroundColor: const Color(0xff5c6bc0),
             body: SafeArea(
               top: false,
               child: SingleChildScrollView(
@@ -100,7 +102,7 @@ class _SignupPageState extends State<SignupPage> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: const AssetImage(
-                                        "lib/src/assets/images/Untitled design.png"),
+                                        "lib/src/assets/images/signuppagegraphic.png"),
                                     fit: BoxFit.fill,
                                   ),
                                 ),

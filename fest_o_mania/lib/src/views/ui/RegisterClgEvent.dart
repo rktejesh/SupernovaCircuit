@@ -33,7 +33,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff1c69f0),
+        backgroundColor: const Color(0xff5c6bc0),
         body: SafeArea(
             top: false,
             child: SingleChildScrollView(
@@ -51,7 +51,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                 'Register your\nCollege Event ',
                                 style: TextStyle(
                                   fontFamily: 'Alegreya',
-                                  fontSize: 35,
+                                  fontSize: 28,
                                   color: const Color(0xffffffff),
                                 ),
                                 textAlign: TextAlign.center,

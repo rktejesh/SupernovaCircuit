@@ -81,7 +81,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
           primaryColor: Colors.white
         ),
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.white ,
           drawer: AppDrawer(),
           body: Stack(
             fit: StackFit.expand,
@@ -97,7 +97,7 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                     ),
                     SliverAppBar(
                       leading: Container(),
-                        expandedHeight: 300.0,
+                        expandedHeight: 250.0,
                         floating: false,
                         pinned: true,
                         flexibleSpace: FlexibleSpaceBar(
@@ -107,12 +107,12 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                     SliverPinnedHeader(
                       child: Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: TabBar(
                               indicator: BubbleTabIndicator(
-                                indicatorHeight: 60,
+                                indicatorHeight: 45,
                                 indicatorRadius: 10,
-                                insets: EdgeInsets.only(left: 10, right: 10),
+                                insets: EdgeInsets.only(left: 30, right: 30),
                                 indicatorColor: Colors.black12,
                                 tabBarIndicatorSize: TabBarIndicatorSize.tab,
                               ),
@@ -124,24 +124,24 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                                 Tab(
                                   child: SvgPicture.string(
                                     bookmark,
-                                    height: 50,
-                                    width: 50,
+                                    height: 25,
+                                    width: 25,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
                                 Tab(
                                   child: Image.asset(
                                     "lib/src/assets/images/live.png",
-                                    height: 50,
-                                    width: 50,
+                                    height: 25,
+                                    width: 25,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
                                 Tab(
                                   child: Image.asset(
                                     "lib/src/assets/images/2496466-200.png",
-                                    height: 50,
-                                    width: 50,
+                                    height: 25,
+                                    width: 25,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
