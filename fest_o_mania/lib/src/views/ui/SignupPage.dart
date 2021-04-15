@@ -58,7 +58,7 @@ class _SignupPageState extends State<SignupPage> {
     user.updateProfile(displayName: _username);
     await user.reload();
     if (user.emailVerified) {
-      await DatabaseService(uid: user.uid).updateUserData(user.displayName, user.email,user.uid);
+      await DatabaseService(uid: user.uid).updateUserData(user.displayName, user.email,user.uid,null);
       timer.cancel();
     }
   }

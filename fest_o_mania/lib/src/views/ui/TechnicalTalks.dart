@@ -55,10 +55,6 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                           onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Live(),));
-                        },
                         ),
                       ),
                       SizedBox(
@@ -141,10 +137,6 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                               ),
                             ),
                           ),
-                           onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Collection(),));
-                        },
                         ),
                       ),
                     ]

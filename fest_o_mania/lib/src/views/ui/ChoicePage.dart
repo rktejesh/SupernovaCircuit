@@ -48,6 +48,7 @@ class _ChoicePageState extends State<ChoicePage> {
               filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
         });
   }
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   UserCredential user;
   //Authentication for github
@@ -64,7 +65,7 @@ class _ChoicePageState extends State<ChoicePage> {
       final result = await gitHubSignIn.signIn(context);
       final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
       await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
-      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid,null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         setState(() {
@@ -105,7 +106,7 @@ class _ChoicePageState extends State<ChoicePage> {
           loading = true;
         });
         await FirebaseAuth.instance.signInWithCredential(credential);
-        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid);
+        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid,null);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           setState(() {
@@ -135,7 +136,7 @@ class _ChoicePageState extends State<ChoicePage> {
         loading = true;
       });
       await _firebaseAuth.signInAnonymously();
-      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid,null);
     } catch (e) {
       setState(() {
         loading = false;
@@ -159,13 +160,13 @@ class _ChoicePageState extends State<ChoicePage> {
         _showDialog();
       break;
       case FacebookLoginStatus.loggedIn:
+        loading = false;
       await (_loginWithFacebook(_result));
       break;
-      
     }
   }
+
   Future _loginWithFacebook(FacebookLoginResult _result) async {
-    loading = true;
     try {
       setState(() {
         loading = true;
@@ -174,7 +175,7 @@ class _ChoicePageState extends State<ChoicePage> {
       AuthCredential _credential =
           FacebookAuthProvider.credential(_accessToken.token);
       await _firebaseAuth.signInWithCredential(_credential);
-      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid,null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         setState(() {

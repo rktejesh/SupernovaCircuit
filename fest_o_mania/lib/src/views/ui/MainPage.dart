@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'config.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
@@ -5,6 +7,7 @@ import 'package:fest_o_mania/src/views/utils/AppDrawer.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fest_o_mania/src/views/utils/search.dart';
+import 'package:fest_o_mania/src/views/ui/EventPage.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 void main() {
@@ -32,6 +35,7 @@ class MainPageUpcoming extends StatefulWidget {
 
 class _MainPageUpcomingState extends State<MainPageUpcoming>
     with SingleTickerProviderStateMixin {
+
   ScrollController _scrollController;
   TabController _tabController;
   int currentIndex = 0;
@@ -157,26 +161,56 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      ListView.builder(
-                        itemCount: SavedEventImages.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding:
-                                EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                            height: 240,
-                            width: double.infinity,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(SavedEventImages[index]),
-                                    fit: BoxFit.fill
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(15.0),
-                                ),
-                              ),
-                            ),
-                          );
+                      StreamBuilder(
+                        stream:
+                        FirebaseFirestore.instance.collection('Events').snapshots(),
+                        builder: (context, eventSnapshot) {
+                          return eventSnapshot.hasData
+                              ? ListView.builder(
+                              itemCount: eventSnapshot.data.docs.length,
+                              itemBuilder: (context, index) {
+                                DocumentSnapshot eventData =
+                                eventSnapshot.data.docs[index];
+                                  return (eventData.data()['eventCategory'].toString()=="Live") ?
+                                  Container(
+                                    padding:
+                                    EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                                    height: 240,
+                                    width: double.infinity,
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          child: SizedBox(
+                                            height: 100,
+                                            width: double.infinity,
+                                          ),
+                                          onTap: () {
+                                            Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) => EventPage(eventData.reference.id),));
+                                          },
+                                        ),
+                                        Container(
+                                          child: Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(eventData.data()['eventName'].toString()),
+                                                  Text(eventData.data()['collegeName'].toString()),
+                                                ],
+                                              ),
+                                              TextButton(onPressed: () {
+                                                FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser.uid).update({"saved": FieldValue.arrayUnion([eventData.reference.id])});
+                                              },
+                                              child: Text('bookmark'),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ):Container();
+                              })
+                              : CircularProgressIndicator();
                         },
                       ),
                       ListView.builder(

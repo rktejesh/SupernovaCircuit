@@ -20,7 +20,7 @@ class _AppDrawerState extends State<AppDrawer> {
       loading = false;
       await FirebaseAuth.instance.signOut();
     } catch (e) {
-      print(e); // TODO: show dialog with error
+      loading = false;
     }
   }
   String _user = FirebaseAuth.instance.currentUser.displayName;

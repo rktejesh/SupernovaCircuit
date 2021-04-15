@@ -236,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             else if (e.code == 'user-not-found') {
                               loading = false;
-                              errorText = "The email or password is incorrect.";
+                              errorText = "This email is not registered or already has an account.";
                               _showDialog();
                             }
                             else {
