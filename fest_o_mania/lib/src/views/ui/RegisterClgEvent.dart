@@ -1,8 +1,15 @@
 
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
+import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:fest_o_mania/src/views/utils/DateTime.dart';
 
 void main() async {
   await Firebase.initializeApp();
@@ -28,8 +35,45 @@ class RegisterClgEvent extends StatefulWidget {
   _RegisterClgEventState createState() => _RegisterClgEventState();
 }
 
+//bool loading = false;
 class _RegisterClgEventState extends State<RegisterClgEvent> {
+  String errorText;
+  _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return BackdropFilter(
+              child: AlertDialog(
+                content: Text(errorText),
+                actions: [
+                  TextButton(
+                    child: Text('ok'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
+        });
+  }
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  String _eMail = "";
+  String _password = "";
+  String _collegeName = "";
+  String _eventName = "";
+  String _eventDate = "";
+  String _eventCategory = "";
+  String _description = "";
+  String _registrationLink = "";
+  String _facebookLink = "";
+  String _instagramLink = "";
+  DateTime date1;
+  DateTime date2;
   final dbRef = FirebaseDatabase.instance.reference().child("Live");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +83,10 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
             child: SingleChildScrollView(
                 child: Padding(
                     padding: const EdgeInsets.all(20.0),
+                    child : Form(
+                       autovalidateMode: AutovalidateMode.always,
+                       key: formKey,
+
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,14 +108,66 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: TextField(
+                            child: TextFormField(
                               style: TextStyle(
                                   color: Colors.white
                               ),
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
-                                  labelText: 'Username',
+                                  labelText: 'Email',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                      color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                      color: Colors.white,
+                                      )),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  labelStyle: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.white
+                                  )
+                              ),
+                                onChanged: (value) {
+                                setState(() {
+                                  _eMail = value.trim();
+                              });
+                              },
+                              validator: MultiValidator([
+                                RequiredValidator(errorText: "Required"),
+                                EmailValidator(
+                                    errorText: "Not valid Email pattern"),
+                              ]),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
+                              style: TextStyle(color: Colors.white),
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(
+                                      left: 30, right: 20, top: 10, bottom: 10),
+                                  labelText: 'Password',
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
@@ -83,16 +183,31 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  labelStyle: TextStyle(
-                                      fontSize: 19,
-                                      color: Colors.white
-                                  )
-                              ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  labelStyle:
+                                  TextStyle(fontSize: 19, color: Colors.white)),
+                              onChanged: (value) {
+                                setState(() {
+                                  _password = value.trim();
+                                });
+                              },
+                              validator: MultiValidator([
+                                RequiredValidator(errorText: "Required"),
+                              ]),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: TextField(
+                            child: TextFormField(
                               style: TextStyle(
                                   color: Colors.white
                               ),
@@ -110,6 +225,16 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                      color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                      color: Colors.white,
+                                      )),
                                   disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
@@ -120,11 +245,17 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       color: Colors.white
                                   )
                               ),
+                                      onChanged: (value) {
+                                      setState(() {
+                                    _collegeName = value.trim();
+                                   });
+                                  },
+                              validator: RequiredValidator(errorText: "Required"),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: TextField(
+                            child: TextFormField(
                               style: TextStyle(
                                   color: Colors.white
                               ),
@@ -142,34 +273,12 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  disabledBorder: OutlineInputBorder(
+                                  errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  labelStyle: TextStyle(
-                                      fontSize: 19,
-                                      color: Colors.white
-                                  )
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: TextField(
-                              style: TextStyle(
-                                  color: Colors.white
-                              ),
-                              keyboardType: TextInputType.datetime,
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
-                                  labelText: 'Date of event',
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                        color: Colors.white,
-                                      )),
-                                  enabledBorder: OutlineInputBorder(
+                                  focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
                                         color: Colors.white,
@@ -184,11 +293,21 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       color: Colors.white
                                   )
                               ),
+                                      onChanged: (value) {
+                                       setState(() {
+                                        _eventName = value.trim();
+                                    });
+                                  },
+                                    validator: RequiredValidator(errorText: "Required"),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: TextField(
+                            child: BasicDateTimeField(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
                               style: TextStyle(
                                   color: Colors.white
                               ),
@@ -206,6 +325,16 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
                                   disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
@@ -216,11 +345,17 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       color: Colors.white
                                   )
                               ),
+                                      onChanged: (value) {
+                                      setState(() {
+                                      _eventCategory = value.trim();
+                                    });
+                                    },
+                                 validator: RequiredValidator(errorText: "Required"),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: TextField(
+                            child: TextFormField(
                               style: TextStyle(
                                   color: Colors.white
                               ),
@@ -238,6 +373,16 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
                                   disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
@@ -248,6 +393,156 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       color: Colors.white
                                   )
                               ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                    _description = value.trim();
+                                 });
+                                },
+                              validator: RequiredValidator(errorText: "Required"),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
+                                  labelText: 'Registration link for event',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  labelStyle: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.white
+                                  )
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _registrationLink = value.trim();
+                                });
+                              },
+                              validator: RequiredValidator(errorText: "Required"),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
+                                  labelText: 'Facebook post link of event',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  labelStyle: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.white
+                                  )
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _facebookLink = value.trim();
+                                });
+                              },
+
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
+                                  labelText: 'Instagram post link of event',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  labelStyle: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.white
+                                  )
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _instagramLink = value.trim();
+                                });
+                              },
+
                             ),
                           ),
                           Container(
@@ -287,10 +582,44 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                     ]
                                 ),
                                 child: TextButton(
-                                  onPressed: () {
-
-
+                                  onPressed: () async {
+                                    try {
+                                      setState(() {
+                                        loading = true;
+                                      });
+                                      await auth.signInWithEmailAndPassword(
+                                          email: _eMail, password: _password);
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) => LandingPage()));
+                                    } on FirebaseAuthException catch (e) {
+                                      if (e.code == 'invalid-email') {
+                                        setState(() {
+                                          loading = false;
+                                          errorText="The email specified does not exist.";
+                                          _showDialog();
+                                        });
+                                      }
+                                      else if (e.code == 'wrong-password') {
+                                        loading = false;
+                                        errorText = "The password is incorrect.";
+                                        _showDialog();
+                                      }
+                                      else if (e.code == 'user-not-found') {
+                                        loading = false;
+                                        errorText = "The email or password is incorrect.";
+                                        _showDialog();
+                                      }
+                                      else {
+                                        setState(() {
+                                          loading = false;
+                                        });
+                                      }
+                                    }
                                   },
+
+
+
                                   style: ButtonStyle(
                                     padding: MaterialStateProperty.all(EdgeInsets.all(7)),
                                     backgroundColor:
@@ -315,6 +644,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                 )
             )
         )
+    )
     );
   }
 }

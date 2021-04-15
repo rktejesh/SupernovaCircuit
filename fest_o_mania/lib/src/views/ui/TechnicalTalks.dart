@@ -1,5 +1,6 @@
-import 'package:fest_o_mania/src/views/ui/TTLive.dart';
+
 import 'package:fest_o_mania/src/views/utils/search.dart';
+import 'package:fest_o_mania/src/views/ui/TTLive.dart';
 import 'package:flutter/material.dart';
 import 'package:fest_o_mania/src/views/ui/TTCollection.dart';
 
@@ -54,6 +55,10 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                             ),
                             textAlign: TextAlign.center,
                           ),
+                           onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Live(),));
+                        },
                         ),
                       ),
                       SizedBox(
@@ -136,6 +141,10 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                               ),
                             ),
                           ),
+                           onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Collection(),));
+                        },
                         ),
                       ),
                     ]
