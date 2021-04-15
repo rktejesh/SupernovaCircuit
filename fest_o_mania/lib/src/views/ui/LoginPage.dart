@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
+import 'package:fest_o_mania/src/views/ui/Reset.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -184,13 +184,14 @@ class _LoginPageState extends State<LoginPage> {
                   padding:
                       const EdgeInsets.only(bottom: 30, right: 15, left: 15),
                   child: InkWell(
-                    onTap: () {},
-                    child: Text(
-                      'Forgot Password?',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    child: TextButton(
+                      child: Text('Forgot Password?',
+                      style: TextStyle(fontSize: 20, color: Colors.white),),
+                      onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ResetScreen()),               
                     ),
                   ),
+                ),
                 ),
                 SizedBox(
                   width: double.infinity,

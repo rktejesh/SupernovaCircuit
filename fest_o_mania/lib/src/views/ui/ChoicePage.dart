@@ -104,7 +104,6 @@ class _ChoicePageState extends State<ChoicePage> {
         setState(() {
           loading = true;
         });
-        final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
         await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid);
       } on FirebaseAuthException catch (e) {
@@ -146,7 +145,6 @@ class _ChoicePageState extends State<ChoicePage> {
     }
   }
   //Authentication for Facebook user
-  bool _isLogin = false;
   FacebookLogin _facebookLogin = FacebookLogin();
   Future _handleLogin() async {
     FacebookLoginResult _result = await _facebookLogin.logIn(['email']);
@@ -175,7 +173,7 @@ class _ChoicePageState extends State<ChoicePage> {
       FacebookAccessToken _accessToken = _result.accessToken;
       AuthCredential _credential =
           FacebookAuthProvider.credential(_accessToken.token);
-      var a = await _firebaseAuth.signInWithCredential(_credential);
+      await _firebaseAuth.signInWithCredential(_credential);
       await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
@@ -195,10 +193,6 @@ class _ChoicePageState extends State<ChoicePage> {
       errorText="Error could not sign in. Please try again.";
       _showDialog();
     }
-
-    setState(() {
-      _isLogin = true;
-    });
   }
   //Authentication for Facebook user ends here
   @override
