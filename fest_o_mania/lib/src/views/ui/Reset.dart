@@ -11,7 +11,6 @@ class ResetScreen extends StatefulWidget {
 class _ResetScreenState extends State<ResetScreen> {
   String _email;
   final auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold( 
@@ -77,6 +76,21 @@ class _ResetScreenState extends State<ResetScreen> {
                 onPressed: () {
                   auth.sendPasswordResetEmail(email: _email);
                   Navigator.of(context).pop();
+                  return showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text("Reset Password"),
+                  content: Text("An email has been sent to $_email please verify"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text("Okay"),
+                    ),
+                  ],
+                ),
+              );
                 },
                 color: Theme.of(context).accentColor,
               ),

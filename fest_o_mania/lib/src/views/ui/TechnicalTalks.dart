@@ -1,3 +1,5 @@
+import 'package:fest_o_mania/src/views/ui/TTCollection.dart';
+import 'package:fest_o_mania/src/views/ui/TTLive.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -49,6 +51,7 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                    
                     ),
                   ),
                   SizedBox(
@@ -84,6 +87,10 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                               color: const Color(0xff3f4239),
                             ),
                           ),
+                           onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Live(),));
+                        },
                         ),
                       ),
                     ),
@@ -121,6 +128,10 @@ class _TechnicalTalkState extends State<TechnicalTalk> {
                               color: const Color(0xff3f4239),
                             ),
                           ),
+                           onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Collection(),));
+                        },
                         ),
                       ),
                     ),
