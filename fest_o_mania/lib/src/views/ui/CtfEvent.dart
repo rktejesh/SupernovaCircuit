@@ -29,7 +29,7 @@ class _CtfEventPageState extends State<CtfEventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffedeff8),
+      backgroundColor: Colors.white,
       body: SafeArea(
         top: true,
         child: Stack(
@@ -41,7 +41,7 @@ class _CtfEventPageState extends State<CtfEventPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: Text(

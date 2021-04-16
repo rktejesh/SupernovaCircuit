@@ -33,7 +33,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
   initScreen(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1c69f0),
+      backgroundColor: const Color(0xff5c6bc0),
       body: AppLogo(),
     );
   }

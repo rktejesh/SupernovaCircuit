@@ -17,7 +17,7 @@ class AppLogo extends StatelessWidget {
               ),
               Padding(padding: EdgeInsets.only(left:10),
                 child: Text(
-                  'Fest-O-Mania',
+                  'FestOMania',
                   style: TextStyle(
                       fontFamily: 'Forte',
                       fontSize: 35,
@@ -49,7 +49,7 @@ class AppLogo1 extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.only(left:10),
               child: Text(
-                'Fest-O-Mania',
+                'FestOMania',
                 style: TextStyle(
                     fontFamily: 'Forte',
                     fontSize: 29,

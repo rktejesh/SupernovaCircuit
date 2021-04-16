@@ -1,14 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:fest_o_mania/src/views/utils/DateTime.dart';
 
 void main() async {
@@ -59,7 +56,6 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
   }
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
-
   String _eMail = "";
   String _password = "";
   String _collegeName = "";
@@ -77,7 +73,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff1c69f0),
+        backgroundColor: const Color(0xff5c6bc0),
         body: SafeArea(
             top: false,
             child: SingleChildScrollView(
@@ -99,7 +95,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                 'Register your\nCollege Event ',
                                 style: TextStyle(
                                   fontFamily: 'Alegreya',
-                                  fontSize: 35,
+                                  fontSize: 28,
                                   color: const Color(0xffffffff),
                                 ),
                                 textAlign: TextAlign.center,
@@ -617,9 +613,6 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       }
                                     }
                                   },
-
-
-
                                   style: ButtonStyle(
                                     padding: MaterialStateProperty.all(EdgeInsets.all(7)),
                                     backgroundColor:

@@ -48,6 +48,7 @@ class _ChoicePageState extends State<ChoicePage> {
               filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
         });
   }
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   UserCredential user;
   //Authentication for github
@@ -64,7 +65,7 @@ class _ChoicePageState extends State<ChoicePage> {
       final result = await gitHubSignIn.signIn(context);
       final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token);
       await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
-      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid,null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         setState(() {
@@ -105,7 +106,7 @@ class _ChoicePageState extends State<ChoicePage> {
           loading = true;
         });
         await FirebaseAuth.instance.signInWithCredential(credential);
-        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid);
+        await DatabaseService(uid: FirebaseAuth.instance.currentUser.uid).updateUserData(FirebaseAuth.instance.currentUser.displayName, FirebaseAuth.instance.currentUser.email,_firebaseAuth.currentUser.uid,null);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
           setState(() {
@@ -135,7 +136,7 @@ class _ChoicePageState extends State<ChoicePage> {
         loading = true;
       });
       await _firebaseAuth.signInAnonymously();
-      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid,null);
     } catch (e) {
       setState(() {
         loading = false;
@@ -159,13 +160,13 @@ class _ChoicePageState extends State<ChoicePage> {
         _showDialog();
       break;
       case FacebookLoginStatus.loggedIn:
+        loading = false;
       await (_loginWithFacebook(_result));
       break;
-      
     }
   }
+
   Future _loginWithFacebook(FacebookLoginResult _result) async {
-    loading = true;
     try {
       setState(() {
         loading = true;
@@ -174,7 +175,7 @@ class _ChoicePageState extends State<ChoicePage> {
       AuthCredential _credential =
           FacebookAuthProvider.credential(_accessToken.token);
       await _firebaseAuth.signInWithCredential(_credential);
-      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid);
+      await DatabaseService(uid: _firebaseAuth.currentUser.uid).updateUserData(_firebaseAuth.currentUser.displayName, _firebaseAuth.currentUser.email,_firebaseAuth.currentUser.uid,null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-exists-with-different-credential') {
         setState(() {
@@ -198,265 +199,272 @@ class _ChoicePageState extends State<ChoicePage> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: const Color(0xff1c69f0),
+      backgroundColor: const Color(0xff5c6bc0),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom:50.0),
+            padding: const EdgeInsets.only(top: 30),
             child: AppLogo1(),
           ),
-          Container(
-            padding: EdgeInsets.all(40),
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(149, 157, 165, 0.1),
-                              offset: Offset(0, 0),
-                              blurRadius: 24,
-                            )
-                          ]
-                      ),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LoginPage(),));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(
-                              10)),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25))),
-                        ),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontFamily: 'Alegreya',
-                            fontSize: 35,
-                            color: const Color(0xff1c69f0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: SizedBox(
+          Padding(
+            padding: EdgeInsets.only(left: 30, right: 30, top: 60, bottom: 120),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
                     width: double.infinity,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(149, 157, 165, 0.1),
-                              offset: Offset(0, 0),
-                              blurRadius: 16,
-                            )
-                          ]
-                      ),
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SignupPage(),));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(
-                              10)),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25))),
-                        ),
-                        child: Text(
-                          'SignUp',
-                          style: TextStyle(
-                            fontFamily: 'Alegreya',
-                            fontSize: 35,
-                            color: const Color(0xff1c69f0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text(
-                    'OR',
-                    style: TextStyle(
-                      fontFamily: 'Alegreya',
-                      fontSize: 25,
-                      color: const Color(0xff1c69f0),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        child: OutlinedButton(
-                          child: SvgPicture.string(
-                            google,
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(
-                                top: 10, bottom: 10, left: 20, right: 20)),
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.white),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                          onPressed: signInWithGoogle,
-                        ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 30,bottom: 10,right: 45,left: 45),  //use this for left right change sans
+                      child: Container(
                         decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20.0),
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromRGBO(149, 157, 165, 0.1),
                                 offset: Offset(0, 0),
-                                blurRadius: 16,
+                                blurRadius: 24,
                               )
                             ]
                         ),
-                      ),
-                      Container(
                         child: OutlinedButton(
-                          child: SvgPicture.string(
-                            facebook,
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(
-                                top: 10, bottom: 10, left: 20, right: 20)),
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.white),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                          onPressed: ()async {
-                            loading = true;
-                            await _handleLogin();
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LoginPage(),));
                           },
-                        ),
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(149, 157, 165, 0.1),
-                                offset: Offset(0, 0),
-                                blurRadius: 16,
-                              )
-                            ]
-                        ),
-                      ),
-                      Container(
-                        child: OutlinedButton(
-                          child: SvgPicture.string(
-                            github,
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.fill,
-                          ),
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(
-                                top: 10, bottom: 10, left: 20, right: 20)),
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.white),
+                            padding: MaterialStateProperty.all(EdgeInsets.only(left: 45, right: 45, top: 3,bottom: 3)
+                            ),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
+                                    borderRadius: BorderRadius.circular(20))),
                           ),
-                          onPressed: (){
-                            signInWithGitHub();
-                          },
-                        ),
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(149, 157, 165, 0.1),
-                                offset: Offset(0, 0),
-                                blurRadius: 16,
-                              )
-                            ]
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 80, right: 80, top: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(149, 157, 165, 0.1),
-                              offset: Offset(0, 0),
-                              blurRadius: 16,
-                            )
-                          ]
-                      ),
-                      child: OutlinedButton(
-                        onPressed: _signInAnonymously,
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(
-                              10)),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25))),
-                        ),
-                        child: Text(
-                          'Skip for Now',
-                          style: TextStyle(
-                            fontFamily: 'Alegreya',
-                            fontSize: 20,
-                            color: const Color(0xff1c69f0),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontFamily: 'Alegreya',
+                              fontSize: 28,
+                              color: const Color(0xff1c69f0),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 20,bottom: 25,right: 45,left: 45),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(149, 157, 165, 0.1),
+                                offset: Offset(0, 0),
+                                blurRadius: 16,
+                              )
+                            ]
+                        ),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SignupPage(),));
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.only(left: 40, right: 40, top: 3,bottom: 3)
+                            ),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
+                          child: Text(
+                            'SignUp',
+                            style: TextStyle(
+                              fontFamily: 'Alegreya',
+                              fontSize: 28,
+                              color: const Color(0xff1c69f0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10,bottom: 10),
+                    child: Text(
+                      'OR',
+                      style: TextStyle(
+                        fontFamily: 'Alegreya',
+                        fontSize: 20,
+                        color: const Color(0xffe1e7f5),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: OutlinedButton(
+                            child: SvgPicture.string(
+                              google,
+                              height: 30,
+                              width: 30,
+                              fit: BoxFit.fill,
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 20, right: 20)),
+                              backgroundColor: MaterialStateProperty.all(
+                                  Colors.white),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                            onPressed: signInWithGoogle,
+                          ),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(149, 157, 165, 0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 16,
+                                )
+                              ]
+                          ),
+                        ),
+                        Container(
+                          child: OutlinedButton(
+                            child: SvgPicture.string(
+                              facebook,
+                              height: 30,
+                              width: 30,
+                              fit: BoxFit.fill,
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 20, right: 20)),
+                              backgroundColor: MaterialStateProperty.all(
+                                  Colors.white),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                            onPressed: ()async {
+                              loading = true;
+                              await _handleLogin();
+                            },
+                          ),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(149, 157, 165, 0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 16,
+                                )
+                              ]
+                          ),
+                        ),
+                        Container(
+                          child: OutlinedButton(
+                            child: SvgPicture.string(
+                              github,
+                              height: 30,
+                              width: 30,
+                              fit: BoxFit.fill,
+                            ),
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all(EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 20, right: 20)),
+                              backgroundColor: MaterialStateProperty.all(
+                                  Colors.white),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                            onPressed: (){
+                              signInWithGitHub();
+                            },
+                          ),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(149, 157, 165, 0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 16,
+                                )
+                              ]
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 68, right: 68, top: 40, bottom: 50),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(149, 157, 165, 0.1),
+                                offset: Offset(0, 0),
+                                blurRadius: 16,
+                              )
+                            ]
+                        ),
+                        child: OutlinedButton(
+                          onPressed: _signInAnonymously,
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.all(
+                                5)),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
+                          child: Text(
+                            'Skip for Now',
+                            style: TextStyle(
+                              fontFamily: 'Alegreya',
+                              fontSize: 16,
+                              color: const Color(0xff1c69f0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [const Color(0xff808bca),const Color(0xff7282d6),const Color(0xffe1e7f5)],
                 ),
-              ],
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(60), topLeft: Radius.circular(60)),
-              color: const Color(0xfff4f5fa),
-              border: Border.all(width: 1.0, color: const Color(0xff707070)),
+                borderRadius: BorderRadius.all(Radius.circular(35)),
+                color: const Color(0xfff4f5fa),
+              ),
             ),
           ),
         ],
