@@ -6,8 +6,13 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
+<<<<<<< Updated upstream
 import 'package:fest_o_mania/src/views/utils/StartDateTime.dart';
 import 'package:fest_o_mania/src/views/utils/EndDateTime.dart';
+=======
+import 'package:fest_o_mania/src/views/utils/DateTime.dart';
+import 'package:fest_o_mania/src/views/utils/database.dart';
+>>>>>>> Stashed changes
 
 void main() async {
   await Firebase.initializeApp();
@@ -67,6 +72,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
   String _registrationLink = "";
   String _facebookLink = "";
   String _instagramLink = "";
+  String _twitterLink = "";
   DateTime date1;
   DateTime date2;
   final dbRef = FirebaseDatabase.instance.reference().child("Live");
@@ -546,6 +552,54 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
 
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
+                                  labelText: 'Twitter post link of event',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  disabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  labelStyle: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.white
+                                  )
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _twitterLink = value.trim();
+                                });
+                              },
+
+                            ),
+                          ),
                           Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.only(bottom: 20, top: 20, right: 15, left: 15),
@@ -588,8 +642,8 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       setState(() {
                                         loading = true;
                                       });
-                                      await auth.signInWithEmailAndPassword(
-                                          email: _eMail, password: _password);
+                                      await auth.signInWithEmailAndPassword(email: _eMail, password: _password);
+                                      EventDatabaseService().updateEventData(null, _eventName, _collegeName, _eventCategory, _description, date1, date2, _registrationLink, _facebookLink, _instagramLink, _twitterLink);
                                       Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                               builder: (context) => LandingPage()));
