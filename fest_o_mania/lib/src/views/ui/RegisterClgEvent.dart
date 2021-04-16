@@ -6,7 +6,8 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
-import 'package:fest_o_mania/src/views/utils/DateTime.dart';
+import 'package:fest_o_mania/src/views/utils/StartDateTime.dart';
+import 'package:fest_o_mania/src/views/utils/EndDateTime.dart';
 
 void main() async {
   await Firebase.initializeApp();
@@ -174,17 +175,17 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  disabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                        color: Colors.white,
-                                      )),
                                   errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
                                   focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
                                         color: Colors.white,
@@ -299,7 +300,11 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: BasicDateTimeField(),
+                            child: BasicStartDateTimeField(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: BasicEndDateTimeField(),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
