@@ -35,7 +35,6 @@ class MainPageUpcoming extends StatefulWidget {
 
 class _MainPageUpcomingState extends State<MainPageUpcoming>
     with SingleTickerProviderStateMixin {
-
   ScrollController _scrollController;
   TabController _tabController;
   int currentIndex = 0;

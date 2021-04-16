@@ -1,18 +1,16 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
 import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
-<<<<<<< Updated upstream
-import 'package:fest_o_mania/src/views/utils/StartDateTime.dart';
-import 'package:fest_o_mania/src/views/utils/EndDateTime.dart';
-=======
 import 'package:fest_o_mania/src/views/utils/DateTime.dart';
 import 'package:fest_o_mania/src/views/utils/database.dart';
->>>>>>> Stashed changes
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   await Firebase.initializeApp();
@@ -20,6 +18,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,6 +39,29 @@ class RegisterClgEvent extends StatefulWidget {
 
 //bool loading = false;
 class _RegisterClgEventState extends State<RegisterClgEvent> {
+  String imageUrl;
+  uploadImage() async {
+    final _firebaseStorage = FirebaseStorage.instance;
+    final _imagePicker = ImagePicker();
+    PickedFile image;
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+    if (permissionStatus.isGranted){
+      image = await _imagePicker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+      if (image != null){
+        var snapshot = await _firebaseStorage.ref().putFile(file).whenComplete(() => null);
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+      } else {
+        print('No Image Path Received');
+      }
+    } else {
+      print('Permission not granted. Try Again with permission access');
+    }
+  }
   String errorText;
   _showDialog() {
     showDialog(
@@ -66,7 +88,6 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
   String _password = "";
   String _collegeName = "";
   String _eventName = "";
-  String _eventDate = "";
   String _eventCategory = "";
   String _description = "";
   String _registrationLink = "";
@@ -75,7 +96,6 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
   String _twitterLink = "";
   DateTime date1;
   DateTime date2;
-  final dbRef = FirebaseDatabase.instance.reference().child("Live");
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +112,7 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
 
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(20.0),
@@ -601,22 +621,32 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                             ),
                           ),
                           Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.only(bottom: 20, top: 20, right: 15, left: 15),
-                            child: InkWell(
-                              onTap: () {
-
-
-                              },
-                              child: Text(
-                                'Upload Poster',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    color: Colors.white
+                              margin: EdgeInsets.all(15),
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
                                 ),
+                                border: Border.all(color: Colors.white),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    offset: Offset(2, 2),
+                                    spreadRadius: 2,
+                                    blurRadius: 1,
+                                  ),
+                                ],
                               ),
-                            ),
+                              child: (imageUrl != null)
+                                  ? Image.network(imageUrl)
+                                  : null
+                          ),
+                          ElevatedButton(
+                            child: Text("Upload Image"),
+                            onPressed: (){
+                              uploadImage();
+                            },
                           ),
 
                           SizedBox(
