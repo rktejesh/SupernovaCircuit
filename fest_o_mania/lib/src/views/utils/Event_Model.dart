@@ -4,6 +4,7 @@ class Event {
   final String eventName;
   final String collegeName;
   final String eventCategory;
+  final String eventTiming;
   final String description;
   final DateTime startTime;
   final DateTime endTime;
@@ -12,5 +13,5 @@ class Event {
   final String instagramLink;
   final String twitterLink;
 
-  Event({this.imageLink, this.eventName,this.collegeName,this.eventCategory,this.description,this.startTime,this.endTime,this.eventLink,this.facebookLink,this.instagramLink,this.twitterLink});
+  Event({this.imageLink, this.eventName,this.collegeName,this.eventCategory, this.eventTiming, this.description,this.startTime,this.endTime,this.eventLink,this.facebookLink,this.instagramLink,this.twitterLink});
 }

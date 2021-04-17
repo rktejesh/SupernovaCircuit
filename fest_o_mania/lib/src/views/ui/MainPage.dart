@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fest_o_mania/src/views/utils/loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'config.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:fest_o_mania/src/views/utils/AppDrawer.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
@@ -9,24 +10,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fest_o_mania/src/views/utils/search.dart';
 import 'package:fest_o_mania/src/views/ui/EventPage.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MainPageUpcoming(),
-    );
-  }
-}
 
 class MainPageUpcoming extends StatefulWidget {
   @override
@@ -80,11 +63,9 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Theme(
-        data: ThemeData(
-          primaryColor: Colors.white
-        ),
+        data: ThemeData(primaryColor: Colors.white),
         child: Scaffold(
-          backgroundColor: Colors.white ,
+          backgroundColor: Colors.white,
           drawer: AppDrawer(),
           body: Stack(
             fit: StackFit.expand,
@@ -100,56 +81,56 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                     ),
                     SliverAppBar(
                       leading: Container(),
-                        expandedHeight: 250.0,
-                        floating: false,
-                        pinned: true,
-                        flexibleSpace: FlexibleSpaceBar(
-                          background: Slideshow(),
-                        ),
+                      expandedHeight: 250.0,
+                      floating: false,
+                      pinned: true,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Slideshow(),
                       ),
+                    ),
                     SliverPinnedHeader(
                       child: Container(
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: TabBar(
-                              indicator: BubbleTabIndicator(
-                                indicatorHeight: 45,
-                                indicatorRadius: 10,
-                                insets: EdgeInsets.only(left: 30, right: 30),
-                                indicatorColor: Colors.black12,
-                                tabBarIndicatorSize: TabBarIndicatorSize.tab,
-                              ),
-                              overlayColor:
-                                  MaterialStateProperty.all(Colors.transparent),
-                              enableFeedback: true,
-                              controller: _tabController,
-                              tabs: [
-                                Tab(
-                                  child: SvgPicture.string(
-                                    bookmark,
-                                    height: 25,
-                                    width: 25,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Tab(
-                                  child: Image.asset(
-                                    "lib/src/assets/images/live.png",
-                                    height: 25,
-                                    width: 25,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                Tab(
-                                  child: Image.asset(
-                                    "lib/src/assets/images/2496466-200.png",
-                                    height: 25,
-                                    width: 25,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ],
+                            indicator: BubbleTabIndicator(
+                              indicatorHeight: 45,
+                              indicatorRadius: 10,
+                              insets: EdgeInsets.only(left: 30, right: 30),
+                              indicatorColor: Colors.black12,
+                              tabBarIndicatorSize: TabBarIndicatorSize.tab,
                             ),
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            enableFeedback: true,
+                            controller: _tabController,
+                            tabs: [
+                              Tab(
+                                child: SvgPicture.string(
+                                  bookmark,
+                                  height: 25,
+                                  width: 25,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Tab(
+                                child: Image.asset(
+                                  "lib/src/assets/images/live.png",
+                                  height: 25,
+                                  width: 25,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Tab(
+                                child: Image.asset(
+                                  "lib/src/assets/images/2496466-200.png",
+                                  height: 25,
+                                  width: 25,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         color: Colors.white,
                       ),
@@ -161,8 +142,9 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                     controller: _tabController,
                     children: [
                       StreamBuilder(
-                        stream:
-                        FirebaseFirestore.instance.collection('Events').snapshots(),
+                        stream: FirebaseFirestore.instance
+                            .collection('Events')
+                            .snapshots(),
                         builder: (context, eventSnapshot) {
                           return eventSnapshot.hasData
                               ? ListView.builder(
@@ -170,88 +152,440 @@ class _MainPageUpcomingState extends State<MainPageUpcoming>
                               itemBuilder: (context, index) {
                                 DocumentSnapshot eventData =
                                 eventSnapshot.data.docs[index];
-                                  return (eventData.data()['eventCategory'].toString()=="Live") ?
-                                  Container(
-                                    padding:
-                                    EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                                    height: 240,
-                                    width: double.infinity,
+                                return (eventData
+                                    .data()['eventCategory']
+                                    .toString() ==
+                                    "Live")
+                                    ? Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 20,
+                                      left: 20,
+                                      right: 20),
+                                  height: 240,
+                                  width: double.infinity,
+                                  child: Container(
                                     child: Column(
                                       children: [
                                         InkWell(
-                                          child: SizedBox(
-                                            height: 100,
-                                            width: double.infinity,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color:
+                                                  Color.fromRGBO(
+                                                      149,
+                                                      157,
+                                                      165,
+                                                      0.1),
+                                                  offset:
+                                                  Offset(0, 0),
+                                                  blurRadius: 24,
+                                                )
+                                              ],
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      eventData
+                                                          .data()[
+                                                      'imageLink']
+                                                          .toString()),
+                                                  fit: BoxFit.fill),
+                                              borderRadius:
+                                              const BorderRadius
+                                                  .only(
+                                                topRight:
+                                                Radius.circular(
+                                                    15.0),
+                                                topLeft:
+                                                Radius.circular(
+                                                    15.0),
+                                              ),
+                                            ),
                                           ),
                                           onTap: () {
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => EventPage(eventData.reference.id),));
+                                            Navigator.of(context)
+                                                .push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EventPage(eventData
+                                                          .reference.id),
+                                                ));
                                           },
                                         ),
-                                        Container(
-                                          child: Row(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Text(eventData.data()['eventName'].toString()),
-                                                  Text(eventData.data()['collegeName'].toString()),
-                                                ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromRGBO(
+                                                      149,
+                                                      157,
+                                                      165,
+                                                      0.1),
+                                                  offset: Offset(0, 0),
+                                                  blurRadius: 24,
+                                                )
+                                              ],
+                                              borderRadius:
+                                              const BorderRadius
+                                                  .only(
+                                                topRight:
+                                                Radius.circular(
+                                                    15.0),
+                                                topLeft:
+                                                Radius.circular(
+                                                    15.0),
                                               ),
-                                              TextButton(onPressed: () {
-                                                FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser.uid).update({"saved": FieldValue.arrayUnion([eventData.reference.id])});
-                                              },
-                                              child: Text('bookmark'),
-                                              ),
-                                            ],
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Text(eventData
+                                                        .data()[
+                                                    'eventName']
+                                                        .toString()),
+                                                    Text(eventData
+                                                        .data()[
+                                                    'collegeName']
+                                                        .toString()),
+                                                  ],
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                        'Users')
+                                                        .doc(FirebaseAuth
+                                                        .instance
+                                                        .currentUser
+                                                        .uid)
+                                                        .update({
+                                                      "saved": FieldValue
+                                                          .arrayUnion([
+                                                        eventData
+                                                            .reference
+                                                            .id
+                                                      ])
+                                                    });
+                                                  },
+                                                  child: Icon(
+                                                    Icons.bookmark,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         )
                                       ],
                                     ),
-                                  ):Container();
+                                  ),
+                                )
+                                    : Container();
                               })
-                              : CircularProgressIndicator();
+                              : Loading();
                         },
                       ),
-                      ListView.builder(
-                        itemCount: LiveEventImages.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding:
-                                EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                            height: 240,
-                            width: double.infinity,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(LiveEventImages[index]),
-                                    fit: BoxFit.fill),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(15.0),
-                                ),
-                              ),
-                            ),
-                          );
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('Events')
+                            .snapshots(),
+                        builder: (context, eventSnapshot) {
+                          return eventSnapshot.hasData
+                              ? ListView.builder(
+                              itemCount: eventSnapshot.data.docs.length,
+                              itemBuilder: (context, index) {
+                                DocumentSnapshot eventData =
+                                eventSnapshot.data.docs[index];
+                                return (eventData
+                                    .data()['eventTiming']
+                                    .toString() ==
+                                    "Live")
+                                    ? Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 20,
+                                      left: 20,
+                                      right: 20),
+                                  height: 240,
+                                  width: double.infinity,
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color:
+                                                  Color.fromRGBO(
+                                                      149,
+                                                      157,
+                                                      165,
+                                                      0.1),
+                                                  offset:
+                                                  Offset(0, 0),
+                                                  blurRadius: 24,
+                                                )
+                                              ],
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      eventData
+                                                          .data()[
+                                                      'imageLink']
+                                                          .toString()),
+                                                  fit: BoxFit.fill),
+                                              borderRadius:
+                                              const BorderRadius
+                                                  .only(
+                                                topRight:
+                                                Radius.circular(
+                                                    15.0),
+                                                topLeft:
+                                                Radius.circular(
+                                                    15.0),
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            Navigator.of(context)
+                                                .push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EventPage(eventData
+                                                          .reference.id),
+                                                ));
+                                          },
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromRGBO(
+                                                      149,
+                                                      157,
+                                                      165,
+                                                      0.1),
+                                                  offset: Offset(0, 0),
+                                                  blurRadius: 24,
+                                                )
+                                              ],
+                                              borderRadius:
+                                              const BorderRadius
+                                                  .only(
+                                                topRight:
+                                                Radius.circular(
+                                                    15.0),
+                                                topLeft:
+                                                Radius.circular(
+                                                    15.0),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Text(eventData
+                                                        .data()[
+                                                    'eventName']
+                                                        .toString()),
+                                                    Text(eventData
+                                                        .data()[
+                                                    'collegeName']
+                                                        .toString()),
+                                                  ],
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                        'Users')
+                                                        .doc(FirebaseAuth
+                                                        .instance
+                                                        .currentUser
+                                                        .uid)
+                                                        .update({
+                                                      "saved": FieldValue
+                                                          .arrayUnion([
+                                                        eventData
+                                                            .reference
+                                                            .id
+                                                      ])
+                                                    });
+                                                  },
+                                                  child: Icon(
+                                                    Icons.bookmark,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                    : Container();
+                              })
+                              : Loading();
                         },
                       ),
-                      ListView.builder(
-                        itemCount: UpcomingEventImages.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding:
-                                EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                            height: 240,
-                            width: double.infinity,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(UpcomingEventImages[index]),
-                                    fit: BoxFit.fill),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(15.0),
-                                ),
-                              ),
-                            ),
-                          );
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('Events')
+                            .snapshots(),
+                        builder: (context, eventSnapshot) {
+                          return eventSnapshot.hasData
+                              ? ListView.builder(
+                              itemCount: eventSnapshot.data.docs.length,
+                              itemBuilder: (context, index) {
+                                DocumentSnapshot eventData =
+                                eventSnapshot.data.docs[index];
+                                return (eventData
+                                    .data()['eventTiming']
+                                    .toString() ==
+                                    "Upcoming")
+                                    ? Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 20,
+                                      left: 20,
+                                      right: 20),
+                                  height: 240,
+                                  width: double.infinity,
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color:
+                                                  Color.fromRGBO(
+                                                      149,
+                                                      157,
+                                                      165,
+                                                      0.1),
+                                                  offset:
+                                                  Offset(0, 0),
+                                                  blurRadius: 24,
+                                                )
+                                              ],
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      eventData
+                                                          .data()[
+                                                      'imageLink']
+                                                          .toString()),
+                                                  fit: BoxFit.fill),
+                                              borderRadius:
+                                              const BorderRadius
+                                                  .only(
+                                                topRight:
+                                                Radius.circular(
+                                                    15.0),
+                                                topLeft:
+                                                Radius.circular(
+                                                    15.0),
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            Navigator.of(context)
+                                                .push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EventPage(eventData
+                                                          .reference.id),
+                                                ));
+                                          },
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromRGBO(
+                                                      149,
+                                                      157,
+                                                      165,
+                                                      0.1),
+                                                  offset: Offset(0, 0),
+                                                  blurRadius: 24,
+                                                )
+                                              ],
+                                              borderRadius:
+                                              const BorderRadius
+                                                  .only(
+                                                topRight:
+                                                Radius.circular(
+                                                    15.0),
+                                                topLeft:
+                                                Radius.circular(
+                                                    15.0),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Text(eventData
+                                                        .data()[
+                                                    'eventName']
+                                                        .toString()),
+                                                    Text(eventData
+                                                        .data()[
+                                                    'collegeName']
+                                                        .toString()),
+                                                  ],
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                        'Users')
+                                                        .doc(FirebaseAuth
+                                                        .instance
+                                                        .currentUser
+                                                        .uid)
+                                                        .update({
+                                                      "saved": FieldValue
+                                                          .arrayUnion([
+                                                        eventData
+                                                            .reference
+                                                            .id
+                                                      ])
+                                                    });
+                                                  },
+                                                  child: Icon(
+                                                    Icons.bookmark,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                    : Container();
+                              })
+                              : Loading();
                         },
                       ),
                     ],

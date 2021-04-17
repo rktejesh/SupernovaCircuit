@@ -1,86 +1,59 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:path/path.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fest_o_mania/src/views/utils/LandingPage.dart';
-import 'package:fest_o_mania/src/views/ui/ChoicePage.dart';
-import 'package:fest_o_mania/src/views/utils/DateTime.dart';
 import 'package:fest_o_mania/src/views/utils/database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-void main() async {
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: RegisterClgEvent(),
-    );
-  }
-}
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class RegisterClgEvent extends StatefulWidget {
   @override
   _RegisterClgEventState createState() => _RegisterClgEventState();
 }
 
-//bool loading = false;
+
 class _RegisterClgEventState extends State<RegisterClgEvent> {
+  String errorText;
+  _showDialog() {
+    print(errorText);
+  }
+  final format = DateFormat("yyyy-MM-dd at HH:mm");
   String imageUrl;
+  String dropdownValue = 'Hackathon';
   uploadImage() async {
     final _firebaseStorage = FirebaseStorage.instance;
-    final _imagePicker = ImagePicker();
-    PickedFile image;
     await Permission.photos.request();
+    PickedFile image;
     var permissionStatus = await Permission.photos.status;
     if (permissionStatus.isGranted){
-      image = await _imagePicker.getImage(source: ImageSource.gallery);
-      var file = File(image.path);
+      image = await ImagePicker().getImage(source: ImageSource.gallery);
+      File file = File(image.path);
+      String filename = basename(image.path);
       if (image != null){
-        var snapshot = await _firebaseStorage.ref().putFile(file).whenComplete(() => null);
-        var downloadUrl = await snapshot.ref.getDownloadURL();
-        setState(() {
-          imageUrl = downloadUrl;
-        });
+        try {
+          await _firebaseStorage
+              .ref('Events/$_collegeName _$filename')
+              .putFile(file);
+            String downloadURL = await FirebaseStorage.instance.ref('Events/$_collegeName _$filename').getDownloadURL();
+            setState(() {
+              imageUrl = downloadURL;
+            });
+        } on FirebaseException catch (e) {
+          print(e.toString());
+        }
       } else {
         print('No Image Path Received');
       }
     } else {
       print('Permission not granted. Try Again with permission access');
     }
-  }
-  String errorText;
-  _showDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return BackdropFilter(
-              child: AlertDialog(
-                content: Text(errorText),
-                actions: [
-                  TextButton(
-                    child: Text('ok'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              ),
-              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
-        });
   }
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -326,22 +299,13 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: BasicStartDateTimeField(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: BasicEndDateTimeField(),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: TextFormField(
+                            child: DateTimeField(
                               style: TextStyle(
                                   color: Colors.white
                               ),
-                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(left: 30 , right: 20, top: 10, bottom: 10),
-                                  labelText: 'Category of event',
+                                  labelText: 'Event Start Time',
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
@@ -352,12 +316,50 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  errorBorder: OutlineInputBorder(
+                                  disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  focusedErrorBorder: OutlineInputBorder(
+                                  labelStyle: TextStyle(fontSize: 19, color: Colors.white)),
+                              format: format,
+                              onShowPicker: (context, currentValue) async {
+                                final date = await showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime(2020),
+                                    initialDate: currentValue ?? DateTime.now(),
+                                    lastDate: DateTime(2100));
+                                if (date != null) {
+                                  final time = await showTimePicker(
+                                    context: context,
+                                    initialTime:
+                                    TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                                  );
+                                  date1 = DateTimeField.combine(date, time);
+                                  return DateTimeField.combine(date, time);
+                                } else {
+                                  date1 = currentValue;
+                                  return currentValue;
+                                }
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: DateTimeField (
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(
+                                      left: 30, right: 20, top: 10, bottom: 10),
+                                  labelText: 'Event End Time',
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(40),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
                                         color: Colors.white,
@@ -367,18 +369,65 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       )),
-                                  labelStyle: TextStyle(
-                                      fontSize: 19,
-                                      color: Colors.white
-                                  )
-                              ),
-                                      onChanged: (value) {
-                                      setState(() {
-                                      _eventCategory = value.trim();
-                                    });
-                                    },
-                                 validator: RequiredValidator(errorText: "Required"),
+
+                                  labelStyle:
+                                  TextStyle(fontSize: 19, color: Colors.white)),
+                              format: format,
+                              onShowPicker: (context, currentValue) async {
+                                final date = await showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime(2020),
+                                    initialDate: currentValue ?? DateTime.now(),
+                                    lastDate: DateTime(2100));
+                                if (date != null) {
+                                  final time = await showTimePicker(
+                                    context: context,
+                                    initialTime:
+                                    TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                                  );
+                                  date2 = DateTimeField.combine(date, time);
+                                  return DateTimeField.combine(date, time);
+                                } else {
+                                  date2 = currentValue;
+                                  return currentValue;
+                                }
+                              },
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right:20.0,left: 30),
+                                child: DropdownButton<String>(
+                                  iconDisabledColor: Colors.black,
+                                  isExpanded: true,
+                                  dropdownColor: const Color(0xff5c6bc0),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 19,
+                                    fontFamily: 'Alegreya'
+                                  ),
+                                  value: dropdownValue,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValue = newValue;
+                                    });
+                                  },
+                                  items: <String>['Hackathon', 'CTF Events', 'Technical Talks', 'Coding Events']
+                                      .map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                border: Border.all(color: Colors.white)
+                              ),
+                            )
                           ),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
@@ -670,34 +719,30 @@ class _RegisterClgEventState extends State<RegisterClgEvent> {
                                   onPressed: () async {
                                     try {
                                       setState(() {
-                                        loading = true;
                                       });
                                       await auth.signInWithEmailAndPassword(email: _eMail, password: _password);
-                                      EventDatabaseService().updateEventData(null, _eventName, _collegeName, _eventCategory, _description, date1, date2, _registrationLink, _facebookLink, _instagramLink, _twitterLink);
+                                      DateTime.now().isAfter(date1) ? _eventCategory = "Live" : _eventCategory = "Upcoming";
+                                      EventDatabaseService().updateEventData(imageUrl, _eventName, _collegeName, dropdownValue ,_eventCategory, _description, date1, date2, _registrationLink, _facebookLink, _instagramLink, _twitterLink);
                                       Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                               builder: (context) => LandingPage()));
                                     } on FirebaseAuthException catch (e) {
                                       if (e.code == 'invalid-email') {
                                         setState(() {
-                                          loading = false;
                                           errorText="The email specified does not exist.";
                                           _showDialog();
                                         });
                                       }
                                       else if (e.code == 'wrong-password') {
-                                        loading = false;
                                         errorText = "The password is incorrect.";
                                         _showDialog();
                                       }
                                       else if (e.code == 'user-not-found') {
-                                        loading = false;
                                         errorText = "The email or password is incorrect.";
                                         _showDialog();
                                       }
                                       else {
                                         setState(() {
-                                          loading = false;
                                         });
                                       }
                                     }

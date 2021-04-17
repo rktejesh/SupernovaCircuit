@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
               filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6));
         });
   }
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   String _email = "";
